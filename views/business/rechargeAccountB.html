@@ -1,0 +1,31 @@
+<ion-view style="background: #f2f5f9">
+    <style>
+        .item{border-bottom-color:#e5e5e5}
+    </style>
+    <ion-content>
+        <div class="list">
+            <a class="item item-body" style="background:#fD685D;height:4rem;">
+                <p class="item-note" style="color:#FFFFFF;font-size: 16px;" ng-click="goRechargeAccountRecordList()">
+                    账户收支明细
+                    <i class="ion ion-ios-arrow-right" style="margin-left: 0.1rem"></i>
+                </p>
+                <br>
+                <p class="item" style="background:transparent;border-color:transparent;
+                                          color:#FFFFFF;font-size:16px;text-align:center;margin-left:0.2rem;margin-top: 40px">
+                    储值账户余额（元）
+                </p>
+                <span></span>
+                <p class="item" style="background:transparent;border-color:transparent;
+                                          color:#FFFFFF;font-size:20px;text-align:center;margin-top:-0.6rem;">
+                    {{balance}}
+                </p>
+            </a>
+        </div>
+        <div style="text-align: center">
+            <button class="button  button-positive"
+                    style="margin-top:2rem;width: 6.9rem;height:0.88rem;background-color:#ff4a59;font-size:0.34rem;border-radius: 0.46rem" ui-sref="recharge">
+                充值
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

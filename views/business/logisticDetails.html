@@ -1,0 +1,32 @@
+<ion-view style="background: #f2f5f9">
+    <style>
+        .c2{color: #2A2A2A}
+        .f6{color: #FF6666}
+    </style>
+    <ion-content>
+        <div class="list">
+            <p class="item"><span style="color: #666666;font-size: 0.28rem">快递公司</span>：<span style="color: #333333;font-size: 0.3rem">{{logisticsInfo.showapi_res_body.expTextName}}</span><br>
+                <span style="color: #666666;font-size: 0.28rem">快递单号</span>：<span style="color: #333333;font-size: 0.3rem">{{logisticsInfo.showapi_res_body.mailNo}}</span></p>
+        </div>
+        <div  style="background: white;padding:10px 0" >
+            <ul>
+                <li ng-repeat="item in logisticsInfo.showapi_res_body.data" style="margin: 10px;">
+                    <p  style="font-size: 12px;margin-bottom: 5px;" ng-class="{'f6':0==$index}" class="c2">{{item.time}}</p>
+                    <p style="font-size: 14px;" ng-class="{'f6':0==$index}" class="c2">{{item.context}}
+                </li>
+            </ul>
+        </div>
+        <!--<div style="background: white;margin-bottom: 20px">
+            <ul style="list-style: none">
+                <p ng-if="state == 3" style="font-size: 0.32rem;color: #ff4a59;padding-top: 30px;padding-left: 30px">[收货地址]{{param.orderDetailInfo.province}}</p>
+                <p ng-if="state == 2" style="font-size: 0.32rem;color: #ff4a59;padding-top: 30px;padding-left: 30px">在途中</p>
+                <p ng-if="state == 3" style="font-size: 0.32rem;color: #ff4a59;padding-top: 30px;padding-left: 30px">已签收</p>
+                <p ng-if="state == 4" style="font-size: 0.32rem;color: #ff4a59;padding-top: 30px;padding-left: 30px">问题件</p>
+                <li ng-repeat="item in dataList" style="margin-top: 30px;margin-left: 20px">
+                    <p style="font-size: 0.28rem;color: #666666">{{item.AcceptStation}}</p>
+                    <p style="font-size: 0.24rem;color: #999999">{{item.AcceptTime}}</p>
+                </li>
+            </ul>
+        </div>-->
+    </ion-content>
+</ion-view>

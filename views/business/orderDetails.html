@@ -1,0 +1,45 @@
+<ion-view  style="background: #f2f5f9">
+    <ion-content>
+        <div style="background: #ff4a59;width: 100%;height: 1rem;line-height: 1rem;" >
+            <p style="margin-left:20px;font-size: 0.28rem;color: #FFFFFF" ng-if="param.orderDetailInfo.status=='1'">买家已支付</p>
+            <p style="margin-left:20px;font-size: 0.28rem;color: #FFFFFF" ng-if="param.orderDetailInfo.status=='2'">买家已收货</p>
+            <p style="margin-left:20px;font-size: 0.28rem;color: #FFFFFF" ng-if="param.orderDetailInfo.status=='0'">买家未支付</p>
+            <p style="margin-left:20px;font-size: 0.28rem;color: #FFFFFF" ng-if="param.orderDetailInfo.status=='4'">买家待收货</p>
+            <p style="margin-left:20px;font-size: 0.28rem;color: #FFFFFF" ng-if="param.orderDetailInfo.status=='6'">交易已关闭</p>
+        </div>
+        <div class="list" style="background: white;position: relative;height: 90px">
+            <div style="margin-left:50px;" >
+                <img src="images/orderDetail/Positioning.png" style="width: 24px;height: 30px;position: absolute;top: 0.5rem;left: 0.2rem">
+                <p  style="font-size: 14px;color: #333333;margin-top: 0.3rem">收货人:{{param.orderAddressDetail.userName}}<span style="float:right;margin-right:0.4rem;font-size: 14px;color: #333333">{{param.orderAddressDetail.userPhone}}</span></p>
+                <p style="margin-top: 18px;font-size: 14px;color: #333333">收货地址：{{param.orderAddressDetail.province+param.orderAddressDetail.detailAddress}}</p>
+            </div>
+        </div>
+        <div class="list">
+            <a class="item" style="color: #333333;font-size: 0.28rem">美享专供</a>
+            <a class="item item-avatar" style="min-height: 3rem" ng-click="goOffline()">
+                <img ng-src="{{param.orderDetailInfo.businessProductFirstUrl}}"
+                     style="border-radius: 0;min-width: 2rem;min-height: 2rem">
+                <h2 style="margin-left:1.2rem;font-size:0.29rem;color: #333333">{{param.orderDetailInfo.businessProductName}}</h2>
+                <p style="color:#999999;margin-left:1.2rem;margin-top:0.2rem;font-size: 0.28rem">{{param.orderDetailInfo.productSpec}}</p>
+                <p style="color: #ff4a59;margin-left: 1.2rem;margin-top: 0.54rem;font-size: 0.4rem;">￥{{param.orderDetailInfo.businessProductPrice}}</p>
+            </a>
+            <p class="item" ><span style="color:#333333;font-size:0.3rem;float: left;margin-left: 0.2rem;margin-top: 0.1rem">运费（快递）</span> <span style="float: right;margin-right: 0.2rem">￥0.00</span></p>
+            <p class="item" >
+                <span style="color:#333333;font-size:0.3rem;float: left;margin-left: 0.2rem;margin-top: 0.1rem">实付款（含运费）</span>
+                <span ng-if="param.orderDetailInfo.type != 'seckill' && param.orderDetailInfo.type  != 'collage' && param.orderDetailInfo.type  != 'bargain'" style="float: right;margin-right: 0.2rem;color: #ff4a59;font-weight: 600">￥{{(param.orderDetailInfo.businessProductPrice*param.orderDetailInfo.businessProductNum).toFixed(2)}}</span>
+                <span ng-if="param.orderDetailInfo.type == 'seckill'" style="float: right;margin-right: 0.2rem;color: #ff4a59;font-weight: 600">￥{{param.orderDetailInfo.payAmount.toFixed(2)}}</span>
+                <span ng-if="param.orderDetailInfo.type == 'collage'" style="float: right;margin-right: 0.2rem;color: #ff4a59;font-weight: 600">￥{{(param.orderDetailInfo.collageAmount*param.orderDetailInfo.businessProductNum).toFixed(2)}}</span>
+                <span ng-if="param.orderDetailInfo.type == 'bargain'" style="float: right;margin-right: 0.2rem;color: #ff4a59;font-weight: 600">￥{{(param.orderDetailInfo.payAmount*param.orderDetailInfo.businessProductNum).toFixed(2)}}</span>
+            </p>
+        </div>
+        <!--流水-->
+        <div class="list" style="width: 100%;background: white;font-size: 14px;color: #666666;padding: 0.3rem">
+            <p style="height: 0.5rem">订单编号: {{param.orderDetailInfo.businessOrderId}}</p>
+            <!--<p style="height: 0.5rem" ng-if="param.orderDetailInfo.status!='0'">交易流水号： <span class="pCopy">{{param.orderDetailInfo.transactionId}}</span><button class="btn" style="margin-left: 5px">复制</button></p>-->
+            <p style="height: 0.5rem" ng-if="param.orderDetailInfo.status!='0'">交易流水号：{{param.orderDetailInfo.transactionId}}</p>
+            <p style="height: 0.5rem">创建时间：{{param.orderDetailInfo.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+            <p style="height: 0.5rem" ng-if="param.orderDetailInfo.status!='0'">付款时间：{{param.orderDetailInfo.payDate|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+            <p  style="height: 0.5rem" ng-if="param.orderDetailInfo.status=='2'">完成时间：{{param.orderDetailInfo.updateDate|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+        </div>
+    </ion-content>
+</ion-view>

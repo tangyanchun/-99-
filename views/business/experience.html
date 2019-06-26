@@ -1,0 +1,28 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <!--<div class="list" style="background:white;">-->
+            <!--<h1 style="font-size: 16px;color: #333333;margin-left: 10px;margin-top: 0.3rem;font-weight:700 ;">免费体验课</h1>-->
+            <!--<div class="row" style="color:#666666;margin-top: 0.2rem">-->
+                <!--<div class="row" style="color:#666666;margin-top: 0.2rem">-->
+                    <!--<div class="col col-33" ng-repeat="item in param.trainingProductListNoNeedPay" ng-if="item.price==0.00" ng-click="courseDetails(item.productId)">-->
+                        <!--<img ng-src="{{item.firstUrl}}" style="height: 1.69rem;width:2.18rem;margin-bottom: 0.2rem;">-->
+                        <!--<p style="color: #333333;font-size: 0.28rem">{{item.productName}}</p>-->
+                        <!--<p style="color: #888888;font-size: 0.22rem">{{item.description}}</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="list" style="background: white;">
+            <h1 style="font-size: 16px;color: #333333;margin-left: 10px;padding-top: 10px;font-weight:700 ;">体验课</h1>
+            <a class="item item-thumbnail-left"
+               style="border-color: white;border-bottom: 1px solid #e5e5e5"
+               ng-repeat="item in param.trainingProductListNoNeedPay" ng-click="courseDetails(item.productId)">
+                <img ng-src="{{item.firstUrl}}" style="min-width: 3rem;min-height: 2rem;border-radius: 4px;padding-bottom: 5px">
+                <p style="font-size:16px;margin-left:28%;margin-top: 6px">{{item.productName}}</p>
+                <br><br>
+                <p style="margin-left:28%;font-size:10px;color:#999999;margin-top: -10px">{{item.playNum}}次播放</p>
+                <p style="margin-left:28%;font-size:16px;color:#ff4a59;">￥{{item.price}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

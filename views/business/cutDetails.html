@@ -1,0 +1,116 @@
+<ion-view style="background: #f2f5f9" >
+    <style>
+        .check{
+            color: #4A4A4A;
+            letter-spacing: 0;
+            background: #F2F5F9;
+            border-radius: 14px;
+        }
+        .check_type{
+            color: #FFFFFF;
+            letter-spacing: 0;
+            background: #FF6666;
+            border-radius: 14px;
+        }
+    </style>
+    <ion-content >
+        <!--轮播图部分-->
+        <ion-slide-box auto-play="true" does-continue="true" slide-interval=2000 show-pager="false">
+            <ion-slide ng-repeat="item in param.product.productDetail.listPic">
+                <div class="box" style="height:7.32rem;width: 7.5rem;">
+                    <img ng-src="{{item}}" style="height:7.32rem;width: 7.5rem;"/>
+                    <div style="position: absolute;bottom: 20px;right: 20px;font-size: 0.34rem;color: #999999"><span >{{param.currentIndex}}</span>/<span >{{param.totalIndex}}</span></div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="list">
+
+            <div class="row" style="background:#FFFFFF;height: 60px;">
+                <div class="col col-20">
+                    <p style="margin-top: -12px;color: #f55066"><span style="font-size: 17px;">￥</span><span style="font-size: 20px;">{{param.product.price}}</span></p>
+                </div>
+                <div class="col col-50">
+                    <p style="font-size: 12px;margin-top: 20px;color: #f55066"><span style="font-size: 15px">{{param.product.productDetail.productSalesVolume}}人</span><span style="font-size: 12px;">已成功砍价购买</span></p>
+                </div>
+                <div class="col col-30" style="line-height: 9px;">
+                    <p style="font-size: 12px;color: #000">距离结束</p>
+                    <p style="font-size: 12px;color: #FF6666;" get-data="getData()"  start-time="time"  timer-btns></p>
+
+                </div>
+            </div>
+            <div class="item item-body" >
+                <h1 style="font-family: PingFang-SC-Regular;font-size: 15px;color: #434a54;letter-spacing: 0;line-height: 22px;
+    margin-bottom: 8px;border-bottom: 1px solid #EAE6E6 ;padding-bottom: 10px;margin-top: -3px">{{param.product.name}}</h1>
+                <span style="font-family: PingFang-SC-Regular;font-size: 12px;color: #656d78;letter-spacing: 0;line-height: 22px;">{{param.product.description}}</span>
+                </p>
+            </div>
+        </div>
+        <div class="list" style="margin-top: 0.3rem;margin-left: -23px" ng-click="viewInstructions()">
+            <a style="color:#666666" class="item item-icon-right">
+                <i class="icon ion-chevron-right" style="font-size:0.3rem"></i>
+                <span style="font-size:0.24rem">{{param.product.productDetail.sendAddress}}</span>
+                <span ng-repeat="item in param.product.productDetail.services"
+                      style="margin-left:0.2rem;font-size:0.24rem"><img src="images/success.png" style="width: 20px;height: 20px;display: inline-block;margin-left: 10px;margin-right: 10px">
+                    {{item}}
+                </span>
+            </a>
+        </div>
+        <div class="list">
+            <label class="item item-stacked-label" style="border-color:transparent;position: relative">
+                <div style="position:absolute;">
+                    <img src="images/xian.png">
+                    <span style="position:absolute;width:100%;height:100%;left:0;top:0;display:flex;justify-content:center;align-items: center;">商品详情</span>
+                </div>
+            </label>
+        </div>
+        <img ng-repeat="item in param.product.productDetail.detailPic"
+             ng-src="{{item}}"
+             style="width:100%;"><br><br><br>
+    </ion-content>
+    <!--商品已下架-->
+    <p style="width: 100%;height: 30px;text-align: center;line-height: 30px;background: grey;color: #ffffff;font-size: 14px;position:fixed;bottom: 50px;left: 0px;z-index: 1001" ng-if="param.product.status =='0'">商品已下架啦~</p>
+    <!--底部按钮-->
+    <div style="width: 100%;background: #FFFFFF ;position: absolute;left: 0px;bottom: 0px;right: 0px;height: 48px;">
+        <ul style="display: flex;flex-wrap: wrap;justify-content: space-between;font-size: 14px">
+            <li style="background:#f6f7fb;color: #434a54;font-size:0.36rem;width: 50%;height: 1rem;line-height: 1rem;text-align: center" ng-click="bargainGoods()">
+                <img src="images/bargain.png" style="width: 22px;height: 25px;display: inline-block;vertical-align:middle ">
+                 砍价商品
+            </li>
+            <li style="background: #fb4b4b;color:white;font-size:0.36rem;width: 50%;height: 1rem;line-height: 1rem;text-align: center" ng-click="toCut()">
+                <img src="images/my-bargain.png" style="width: 24px;height: 24px;display: inline-block;vertical-align:middle ">
+                去砍价
+            </li>
+        </ul>
+    </div>
+    <!--点击显示服务说明的-->
+    <div class="explain" ng-show="explain"  style="position: absolute;bottom: 0;background:white;z-index: 1001;border: 1px solid #f1f1f1;width: 100%;height: 6rem;">
+        <p style="margin-top: 0.4rem;font-size: 0.4rem;color: #333333;margin-left: 0.2rem;border-bottom: 1px solid #e5e5e5;padding-bottom: 0.4rem;text-align: center">服务说明</p>
+        <p style="height: 0.5rem;line-height: 0.5rem;margin-top: 0.3rem"><span style="width: 0.15rem;height: 0.15rem;color: #ff4a59;border-radius: 10px;display: inline-block;background: #ff4a59;margin-left: 0.2rem"></span><span style="display: inline-block;color: #333333;font-size: 0.3rem;margin-left: 0.1rem;font-weight: 600;margin-top: 0.2rem">发货&售后</span></p>
+        <p style="margin-top: 0.5rem;margin-left: 0.5rem;color: #333333;font-size: 0.28rem">由美享仓库直接发货并提供售后服务</p>
+        <p style="margin-top: 0.5rem"><span style="width: 0.15rem;height: 0.15rem;color: #ff4a59;border-radius: 10px;display: inline-block;background: #ff4a59;margin-left: 0.2rem"></span><span style="display: inline-block;color: #333333;font-size: 0.3rem;margin-left: 0.1rem;font-weight: 600;">急速发货</span></p>
+        <p style="margin-top: 0.3rem;margin-left: 0.5rem;color: #333333;padding-bottom: 0.4rem;font-size: 0.28rem">24小时内急速发货</p>
+        <p ng-click="know()" style="text-align: center;color: #ff4a59;font-size: 0.34rem;margin-top: -0.2rem">我知道啦</p>
+    </div>
+    <!--点击选择型号出现的弹框-->
+    <div class="model" ng-show="model" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10002;background: #000;opacity: 0.42" ng-click="concealment()"></div>
+    <div class="model" ng-show="model" style="position: absolute;bottom: 0;background: white;width: 100%;z-index: 13000;">
+        <div style="border-bottom: 1px solid #e5e5e5;width: 100%;height: 2.3rem;position: relative">
+            <img ng-src="{{param.product.productDetail.listPic[0]}}" style="width: 1.92rem;height: 1.92rem;margin-top: -0.5rem;margin-left: 0.2rem;float: left">
+            <span style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000000;letter-spacing: 0;line-height: 22px;position: absolute;top: 1.7rem;left: 0.2rem">型号：</span>
+            <div style="z-index: 13000;float: left;margin-left: 0.3rem;margin-top: 0.3rem">
+                <p style="color: #ff4a59;font-size: 0.32rem;font-weight: 600">￥{{param.product.price}}</p>
+                <p style="color: #666666;font-size: 0.3rem;margin-top: 0.2rem">请选择型号</p>
+                <p style="margin-top: 0.2rem;font-size: 14px;color: #333333">剩余库存 :<span style="margin-left: 5px;color: #4A4A4A;font-size: 14px">{{param.product.activityNum}}</span></p>
+            </div>
+        </div>
+        <!--型号-->
+        <div class="item row row-wrap">
+            <span ng-if="param.product.productDetail.spec.length != 1" class="check "  style="display: inline-block;font-size: 14px;height: 22px;line-height:3px;padding: 10px;text-align: center;font-family: PingFang-SC-Regular;margin-right: 7px;margin-left: 4px;margin-bottom: 5px"  ng-repeat="item in param.product.productDetail.spec" ng-click="confirmProductSpec(item)" ng-class="{'check_type':param.checkFlag == item}">{{item}}</span>
+            <span ng-if="param.product.productDetail.spec.length == 1" class="check check_type"  style="display: inline-block;font-size: 14px;height: 25px;padding: 10px; font-family: PingFang-SC-Regular;text-align: center;line-height: 8px;margin-left: 4px;margin-top: 10px; margin-bottom: 10px"  ng-repeat="item in param.product.productDetail.spec" >{{item}}</span>
+        </div>
+        <!--点击加入购物车-->
+        <ul style="list-style: none;width: 100%;height: 1rem;display: flex;flex-wrap: wrap;justify-content: space-around;text-align: center;margin-top: 26.5px">
+            <button style="background: #fb4b4b;color:white;font-size:0.36rem;width: 100%;height: 1rem;line-height: 1rem" ng-click="toCut()" ng-disabled="isSubmitted">立即砍价</button>
+        </ul>
+    </div>
+</ion-view>

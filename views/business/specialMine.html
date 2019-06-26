@@ -1,0 +1,59 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <div class="list">
+            <div  style="background: #FFFFFF;height: 2rem;text-align: center;padding: 10px">
+                <img ng-src="{{param.userInfo.photo}}"style="width: 50px;height: 50px;margin: 0 auto;border-radius: 50%">
+                <!--<p style="font-size: 12px;color: #4A4A4A">{{param.userInfo.nickname}}</p>-->
+            </div>
+            <a class="item item-body" style="background:white;padding: 0px">
+
+                <div class="row" style="color:#999;margin-top: 0.3rem;">
+                    <div class="col col-50" style="text-align:left;font-size: 0.3rem;color: #333333;z-index: 1001">
+                        我的订单
+                    </div>
+                    <div class="col col-50" style="text-align: right;font-size: 0.28rem;color: #666666; z-index: 2;" ng-click="goOrderManagement('all')">
+                        <span style="font-size: 0.28rem;color: #666666;">查看更多订单<i class="ion ion-ios-arrow-right" style="margin-left: 0.2rem;font-size: 0.3rem"></i></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="list" style="background:white;margin-top:-0.5rem;height:1.8rem">
+            <div class="row" style="color:#666666">
+                <div class="col col-25" style="text-align:center;" ng-click="goOrderManagement('0')">
+                    <div style="width:0.3rem;height:0.3rem;background-color:#F00;
+                              border-radius:25px;position:absolute;margin-left: 1.05rem;
+                              margin-top:0.1rem" class="smallBox"  ng-if="dp!=0">
+                        <span style="height:0.3rem; line-height:0.3rem; display:block; color:#FFF; text-align:center;font-size: 10px;">{{param.accountInfo[0]}}</span>
+                    </div>
+                    <img src="images/myselfCenter/bt-penging.png" style="font-size: 0.6rem;height: 0.6rem;margin-left: 0.5rem;margin-bottom: 0.2rem;margin-top: 0.2rem">
+                    <p style="font-size: 14px">待付款</p>
+                </div>
+                <div class="col col-25" style="text-align: center;" ng-click="goOrderManagement('1')">
+                    <div style="width:0.3rem;height:0.3rem;background-color:#F00;
+                              border-radius:25px;position:absolute;margin-left: 1.1rem;
+                              margin-top:0.1rem" class="smallBox" ng-if="d!=0">
+                        <span style="height:0.3rem; line-height:0.3rem; display:block; color:#FFF; text-align:center;font-size: 10px;" >{{param.accountInfo[1]}}</span>
+                    </div>
+                    <img src="images/myselfCenter/bt-received.png" style="font-size: 0.6rem;height: 0.6rem;margin-left: 0.5rem;margin-bottom: 0.2rem;margin-top: 0.2rem">
+                    <p style="font-size: 14px">待发货</p>
+                </div>
+                <div class="col col-25" style="text-align: center;" ng-click="goOrderManagement('4')">
+                    <div style="width:0.3rem;height:0.3rem;background-color:#F00;
+                              border-radius:25px;position:absolute;margin-left: 1.1rem;
+                              margin-top:0.1rem" class="smallBox" ng-if="y!=0">
+                        <span style="height:0.3rem; line-height:0.3rem; display:block; color:#FFF; text-align:center;font-size: 10px;" >{{param.accountInfo[2]}}</span>
+                    </div>
+                    <img src="images/myselfCenter/bt-delivered.png" style="font-size: 0.6rem;height: 0.6rem;margin-left: 0.5rem;margin-bottom: 0.2rem;margin-top: 0.2rem">
+                    <p style="font-size: 14px">待收货</p>
+                </div>
+                <div class="col col-25" style="text-align: center;" ng-click="goOrderManagement('2')">
+                    <img src="images/myselfCenter/bt-completed.png" style="font-size: 0.6rem;height: 0.6rem;margin-left: 0.5rem;margin-bottom: 0.2rem;margin-top: 0.2rem">
+                    <p style="font-size: 14px">已完成</p>
+                </div>
+            </div>
+        </div>
+        <div class="list" style="color: #333333">
+            <a class="item" style="font-size:0.3rem" ng-click="goMyselfSetting()">个人设置<i style="float:right;font-size: 0.3rem" class="ion ion-ios-arrow-right"></i></a>
+        </div>
+    </ion-content>
+</ion-view>

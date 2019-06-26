@@ -1,0 +1,36 @@
+<ion-view style="background: #F6F6F6">
+    <ion-content>
+        <ion-slide-box auto-play="true" does-continue="true" slide-interval=2000 show-pager="false">
+            <ion-slide ng-repeat="item in param.imageList track by $index" >
+                <div class="box" style="height:3.98rem;width: 7.50rem">
+                    <div> <img ng-src="{{item}}"
+                                                                    style="height:3.98rem;width:7.50rem"/></div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="list">
+            <ion-item  class="row" style="background: #ffffff;border: 0">
+                <div class="col">
+                    <p>
+                        <span style="font-family: PingFangSC-Regular;font-size: 16px;color: #333333;letter-spacing: 0;">{{projectInfo.projectName}}</span>
+                        <span  style="font-size: 12px;display: inline-block;margin-left: 15px;color: #ffffff;text-align: center;background: #FF6666;width: 40px;height: 17px;line-height: 17px;border-radius: 2px;">{{projectInfo.cardType}}</span>
+                    </p>
+                </div>
+            </ion-item>
+            <li class="item " style="padding: 10px;font-size: 14px">
+                <p  style="color: #333333">市场价格：¥{{projectInfo.initialPrice}}</p>
+                <p style="color: #FF6666!important;margin-top: 5px">优惠价格：¥{{projectInfo.marketPrice}}/{{projectInfo.serviceTimes}}次</p>
+            </li>
+        </div>
+        <div class="list">
+            <p class="item " style="padding: 10px;font-family: PingFangSC-Regular;font-size: 13px;color: #888888;letter-spacing: 0;">类型：{{projectInfo.projectTypeOneName}}</p>
+        </div>
+        <div class="list">
+            <p class="item " style="padding: 10px;font-family: PingFangSC-Regular;font-size: 14px;color: #888888;letter-spacing: 0;">系列：{{projectInfo.projectTypeTwoName}}</p>
+        </div>
+        <div class="list">
+            <p class="item " style="padding: 10px;font-family: PingFangSC-Regular;font-size: 15px;color: #888888;letter-spacing: 0;">功能介绍</p>
+            <textarea style="width:100%;font-size: 0.3rem;color: #888888;padding: 20px;" ng-model="projectInfo.functionIntr"></textarea>
+        </div>
+    </ion-content>
+</ion-view>

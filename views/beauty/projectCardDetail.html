@@ -1,0 +1,17 @@
+<ion-view style="background:white">
+    <ion-content>
+        <ion-item ng-repeat="item in param.projectCardConsumes"  class="row" ng-show="!param.picFlag">
+            <div class="col col-80">
+                <p style="color: #333333;font-size: 15px;margin-top: 10px;font-family: PingFangSC-Regular;letter-spacing: 0;">{{item.flowName}}</p>
+                <p style="color:#888888;font-size: 12px;margin-top: 10px;font-family: PingFangSC-Regular;letter-spacing: 0;">{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+            </div>
+            <div class="col col-20" >
+                <p style="text-align: right;margin-top: 20px;color: #333333;font-size: 15px;font-family: PingFangSC-Regular;letter-spacing: 0;margin-right: 5px;">{{item.consumeNumber}}次</p>
+            </div>
+        </ion-item>
+        <center ng-show="param.picFlag">
+            <img style="width: 80%;margin-top:25%;"
+                 src="https://mximage.oss-cn-beijing.aliyuncs.com/viewPicture/%E7%A9%BA%E7%8A%B6%E6%80%81%E5%9B%BE%403x.png">
+        </center>
+    </ion-content>
+</ion-view>

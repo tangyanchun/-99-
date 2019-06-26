@@ -1,0 +1,18 @@
+<ion-view  style="background: #f2f5f9">
+    <ion-content>
+        <p style="height:30px;line-height:30px;margin-top: 0.4rem;">
+            <span style="display: inline-block;color: #333333;font-size: 0.34rem;margin-left: 0.2rem;font-family:Arial Black;font-weight: 600;letter-spacing:2px;">欢迎您，{{param.userName}}</span>
+            <span style="display: inline-block;width: 2px;height:15px;background: purple;margin-left: 10px"></span>
+            <span style="font-size: 0.24rem;color: #aaaaaa;margin-left: 20px">共{{param.userNextLevelStruct.length}}个家人</span>
+        </p>
+       <div class="list" style="margin-top: 30px">
+           <p class="item" ng-repeat="item in param.userNextLevelStruct">
+               <span style="margin-left: 0.2rem;float: left"><img ng-src="{{item.photo}}" style="width: 44px;height: 44px"></span>
+               <span style="float:left;margin-left: 20px;margin-top: 0.2rem;font-size: 0.3rem;color: #666666">{{item.nickname}}</span>
+               <span style="float: right;margin-right: 0.2rem;margin-top: 0.2rem;" ng-if="item.userType=='business-C-1'">普通会员</span>
+               <span style="float: right;margin-right: 0.2rem;margin-top: 0.2rem;" ng-if="item.userType=='business-B-1'">9小主</span>
+               <span style="float: right;margin-right: 0.2rem;margin-top: 0.2rem;" ng-if="item.userType=='business-A-1'">大当家</span>
+           </p>
+       </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,14 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <div style="width:100%;margin-top: 120px;text-align: center" ng-if="param.status=='check'">
+            <img src="images/drawDetails.png" alt="" style="width:200px;height: 200px;margin: auto">
+            <p style="font-family: 微软雅黑;font-size: 18px;color: #E7462A;margin-top: 41px">提交成功，{{param.withDrawAmount}}元提现正在审核中</p>
+            <p style="font-family: 微软雅黑;font-size: 12px;color: #525252;margin-top: 10px">2个工作日内通过审核，请耐心等候~</p>
+        </div>
+        <div style="width:100%;margin-top: 120px;text-align: center" ng-if="param.status!='check'">
+            <img src="images/drawDetails.png" alt="" style="width:200px;height: 200px;margin: auto">
+            <p style="font-family: 微软雅黑;font-size: 18px;color: #E7462A;margin-top: 41px">提交成功，已经通过系统审核中</p>
+            <p style="font-family: 微软雅黑;font-size: 12px;color: #525252;margin-top: 10px">{{param.withDrawAmount}}元已到您的微信零钱，请注意查收！</p>
+        </div>
+    </ion-content>
+</ion-view>

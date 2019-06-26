@@ -1,0 +1,186 @@
+<ion-view style="background: #f2f5f9" >
+    <style>
+        .check{
+            color: #4A4A4A;
+            letter-spacing: 0;
+            background: #F2F5F9;
+            border-radius: 14px;
+        }
+        .check_type{
+            color: #FFFFFF;
+            letter-spacing: 0;
+            background: #FF6666;
+            border-radius: 14px;
+        }
+    </style>
+    <ion-content >
+         <!--轮播图部分-->
+         <ion-slide-box auto-play="true" does-continue="true" slide-interval=2000 show-pager="false">
+             <ion-slide ng-repeat="item in param.product.productDetail.listPic">
+                 <div class="box" style="height:7.32rem;width: 7.5rem;">
+                     <img ng-src="{{item}}" style="height:7.32rem;width: 7.5rem;"/>
+                     <div style="position: absolute;bottom: 20px;right: 20px;font-size: 0.34rem;color: #999999"><span >{{param.currentIndex}}</span>/<span >{{param.totalIndex}}</span></div>
+                 </div>
+             </ion-slide>
+         </ion-slide-box>
+            <div class="list">
+                <div class="item" style="background: #Fc4B4B;height: 60px;position: relative;padding: 0px">
+                   <!-- <p style="font-size: 12px;color: #FFFFFF;position: absolute;left: 10px;top: 5px" ng-if="param.product.productPrefecture=='9'">砍价后价格</p>
+                    <p style="font-size: 12px;color: #FFFFFF;position: absolute;left: 10px;top: 5px" ng-if="param.product.productPrefecture=='8'">拼团价</p>-->
+                    <p style="margin-left: 10px;margin-top: 19px">
+                        <span class="subdued" style="font-family: PingFangSC-Regular;font-size: 36px;color: #FFFFFF;letter-spacing: 0; "><span style="font-size: 20px;display: inline-block;">￥</span>{{param.product.price}}</span><span style="color: #ffffff;font-size: 12px;margin-left: 10px">零售价<del>￥{{param.product.productDetail.productMarketPrice}}</del></span>
+                    </p>
+                    <div style="position: absolute;top: 11px;
+    right: 10px;">
+                        <p>
+                            <span style="width: 0.8rem;height: 0.35rem;float:right;color: #ff4a59;border: 1px solid #ff4a59;display: inline-block;text-align: center;line-height: 0.35rem;font-size: 10px;border-radius: 16px;background: #ffffff">{{param.product.productDetail.tag[0]}}</span>
+                        </p>
+                        <p style="color: #ffffff;font-size: 12px;display: inline-block;margin-top: 9px">售出{{param.product.productDetail.productSalesVolume}}件</p>
+                    </div>
+                </div>
+                 <div class="item item-body" >
+                    <h1 style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000000;letter-spacing: 0;line-height: 22px;
+    margin-bottom: 8px;border-bottom: 1px solid #EAE6E6 ;padding-bottom: 10px;margin-top: -3px">{{param.product.name}}</h1>
+                        <span style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 22px;">{{param.product.description}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="list" style="margin-top: 0.3rem;margin-left: -23px" ng-click="viewInstructions()">
+                <a style="color:#666666" class="item item-icon-right">
+                    <i class="icon ion-chevron-right" style="font-size:0.3rem"></i>
+                    <span style="font-size:0.24rem">{{param.product.productDetail.sendAddress}}</span>
+                     <span ng-repeat="item in param.product.productDetail.services"
+                          style="margin-left:0.2rem;font-size:0.24rem"><img src="images/success.png" style="width: 20px;height: 20px;display: inline-block;margin-left: 10px;margin-right: 10px">
+                    {{item}}
+                </span>
+                </a>
+            </div>
+            <!--<div class="list" style="margin-top: -0.15rem" ng-click="chooseSpec($event)" ng-if="param.product.productDetail.spec!=undefined" >-->
+                <!--<a style="color:black" class="item item-icon-right">-->
+                    <!--<i class="icon ion-chevron-right"style="font-size:0.3rem;color: #333333"></i>-->
+                    <!--请选择  型号-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--拼团情况-->
+        <div class="list"  style="background: #FFFFFF;margin-top: -10px" ng-if="activityList.length>0">
+            <div style="height: 140px;overflow-y: scroll;border: 2px solid #F2F2F2;">
+                <ion-scroll style="width: 100%;height: 140px;" has-bouncing="false" direction="y">
+                    <div style="width: 100%">
+                        <ul style="display: flex;flex-wrap: wrap;justify-content: space-around; border-bottom: 1px solid #f2f2f2;padding-top: 5px;align-items: center;height: 70px" ng-repeat="item in activityList" ng-click="activityPay(item.id)">
+                            <li style="width: 33%;align-self: center;">
+                                <img  ng-src="{{item.photoUrl}}"style="height:33px;width:33px;border-radius:50%;display: inline-block;margin-left: 18px">
+                                <p style="color: #333333;font-size: 14px;display: inline-block;vertical-align :middle;width: 40px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">{{item.nickName}}</p>
+                            </li>
+                            <li style="width: 46%;color: #333333;font-size: 12px;align-self: center;">
+                                <div>
+                                    <p style="color: #333333;font-size: 13px;margin-left: 12px">还差 <span style="color: #e52833;font-size: 15px">{{item.totalNum}}人</span>拼成</p>
+                                    <p style="font-size: 13px;color: #5a5a5c;line-height: 27px;margin-left: 12px" get-data="getData()"  start-time="item.time" timer-btn></p>
+                                </div>
+                            </li>
+                            <li style="width: 21%;text-align: center;align-self: center">
+                                <p style="font-size: 13px;background: #ff1b32;border-radius: 8px;width: 62px;height: 28px;line-height: 28px;text-align: center;color: #FFFFFF;margin: 0 auto">去拼单</p>
+                            </li>
+                        </ul>
+                     </div>
+                </ion-scroll>
+            </div>
+        </div>
+
+            <div class="list">
+                <label class="item item-stacked-label" style="border-color:transparent;position: relative">
+                    <div style="position:absolute;">
+                        <img src="images/xian.png">
+                        <span style="position:absolute;width:100%;height:100%;left:0;top:0;display:flex;justify-content:center;align-items: center;">商品详情</span>
+                    </div>
+                </label>
+            </div>
+            <img ng-repeat="item in param.product.productDetail.detailPic"
+                 ng-src="{{item}}"
+                 style="width:100%;"><br><br><br>
+    </ion-content>
+    <!--商品已下架-->
+    <p style="width: 100%;height: 30px;text-align: center;line-height: 30px;background: grey;color: #ffffff;font-size: 14px;position:fixed;bottom: 50px;left: 0px;z-index: 1001" ng-if="param.product.status =='0'">商品已下架啦~</p>
+    <div class="tabs " style="padding-top: 0px">
+        <a class="tab-item " style="background: #FFFFFF" ng-click="contactCustomer()">
+            <img src="images/service.png" style="width: 0.45rem;height: 0.46rem;text-align: center;margin:auto;margin-top: 0.1rem;">
+            <p style="font-size: 12px;color: #4A4A4A;margin-top: -0.3rem">客服</p>
+        </a>
+        <!--<a class="tab-item"  ng-click="loginCart()" >-->
+            <!--<div style="width:0.3rem;height:0.3rem;background-color:#F00;-->
+                              <!--border-radius:25px;position:absolute;margin-left: 1.1rem;-->
+                              <!--margin-top:0.1rem" >-->
+                <!--<span style="height:0.3rem; line-height:0.3rem; display:block; color:#FFF; text-align:center;font-size: 10px;">{{param.productUnPaidNum}}</span>-->
+            <!--</div>-->
+                <!--<img src="images/offlineProductDetail/cart.png" alt="" style="width: 0.45rem;height: 0.46rem;text-align: center;margin:auto;margin-top: 0.1rem;">-->
+                <!--<p style="font-size:0.22rem;color:#666666;margin-top: -0.3rem">购物车</p>-->
+            <!--</i>-->
+        <!--</a>-->
+        <a class="tab-item" style="background:#fca1a8;color:white;font-size:15px;" ng-click="goPay('alone')" id="add">
+            单独购买￥{{param.product.price}}
+        </a>
+        <a class="tab-item" style="background: red;color:white;font-size:15px" ng-click="goPay('collage')" id="go">
+            去拼团￥{{param.product.favorablePrice}}
+        </a>
+    </div>
+    <!--点击显示服务说明的-->
+    <div class="explain" ng-show="explain"  style="position: absolute;bottom: 0;background:white;z-index: 1001;border: 1px solid #f1f1f1;width: 100%;height: 6rem;">
+        <p style="margin-top: 0.4rem;font-size: 0.4rem;color: #333333;margin-left: 0.2rem;border-bottom: 1px solid #e5e5e5;padding-bottom: 0.4rem;text-align: center">服务说明</p>
+        <p style="height: 0.5rem;line-height: 0.5rem;margin-top: 0.3rem"><span style="width: 0.15rem;height: 0.15rem;color: #ff4a59;border-radius: 10px;display: inline-block;background: #ff4a59;margin-left: 0.2rem"></span><span style="display: inline-block;color: #333333;font-size: 0.3rem;margin-left: 0.1rem;font-weight: 600;margin-top: 0.2rem">发货&售后</span></p>
+        <p style="margin-top: 0.5rem;margin-left: 0.5rem;color: #333333;font-size: 0.28rem">由美享仓库直接发货并提供售后服务</p>
+        <p style="margin-top: 0.5rem"><span style="width: 0.15rem;height: 0.15rem;color: #ff4a59;border-radius: 10px;display: inline-block;background: #ff4a59;margin-left: 0.2rem"></span><span style="display: inline-block;color: #333333;font-size: 0.3rem;margin-left: 0.1rem;font-weight: 600;">急速发货</span></p>
+        <p style="margin-top: 0.3rem;margin-left: 0.5rem;color: #333333;padding-bottom: 0.4rem;font-size: 0.28rem">24小时内急速发货</p>
+        <p ng-click="know()" style="text-align: center;color: #ff4a59;font-size: 0.34rem;margin-top: -0.2rem">我知道啦</p>
+    </div>
+    <!--点击选择型号出现的弹框-->
+    <div class="model" ng-show="model" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10002;background: #000;opacity: 0.42" ng-click="concealment()"></div>
+    <div class="model" ng-show="model" style="position: absolute;bottom: 0;background: white;width: 100%;z-index: 13000;">
+        <div style="border-bottom: 1px solid #e5e5e5;width: 100%;height: 2.3rem;position: relative">
+            <img ng-src="{{param.product.productDetail.listPic[0]}}" style="width: 1.92rem;height: 1.92rem;margin-top: -0.5rem;margin-left: 0.2rem;float: left">
+              <span style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000000;letter-spacing: 0;line-height: 22px;position: absolute;top: 1.7rem;left: 0.2rem" >型号：</span>
+            <div style="z-index: 13000;float: left;margin-left: 0.3rem;margin-top: 0.3rem">
+                <p style="color: #ff4a59;font-size: 0.32rem;font-weight: 600" ng-if="productPayStatus == 'alone'">￥{{param.product.price}}</p>
+                <p style="color: #ff4a59;font-size: 0.32rem;font-weight: 600" ng-if="productPayStatus == 'collage'">￥{{param.product.favorablePrice}}</p>
+                <p style="color: #666666;font-size: 0.3rem;margin-top: 0.2rem">请选择型号</p>
+                <p style="margin-top: 0.2rem;font-size: 14px;color: #333333" ng-if="productPayStatus == 'alone'">剩余库存 :<span style="margin-left: 5px;color: #4A4A4A;font-size: 14px">{{param.product.productAmount}}</span></p>
+                <p style="margin-top: 0.2rem;font-size: 14px;color: #333333" ng-if="productPayStatus == 'collage'">剩余库存 :<span style="margin-left: 5px;color: #4A4A4A;font-size: 14px">{{param.product.activityNum}}</span></p>
+            </div>
+        </div>
+        <!--型号-->
+        <div class="item row row-wrap">
+            <span ng-if="param.product.productDetail.spec.length != 1" class="check "  style="display: inline-block;font-size: 14px;height: 22px;line-height:3px;padding: 10px;text-align: center;font-family: PingFang-SC-Regular;margin-right: 7px;margin-left: 4px;margin-bottom: 5px"  ng-repeat="item in param.product.productDetail.spec" ng-click="confirmProductSpec(item)" ng-class="{'check_type':param.checkFlag == item}">{{item}}</span>
+            <span ng-if="param.product.productDetail.spec.length == 1" class="check check_type"  style="display: inline-block;font-size: 14px;height: 25px;padding: 10px; font-family: PingFang-SC-Regular;text-align: center;line-height: 8px;margin-left: 4px;margin-top: 10px; margin-bottom: 10px"  ng-repeat="item in param.product.productDetail.spec" >{{item}}</span>
+        </div>
+        <!--数量-->
+        <div class="item" style="width:100%;height:65px;">
+            <span style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000000;letter-spacing: 0;
+line-height: 22px;margin-left: -0.1rem;">购买数量：</span>
+           <!-- <p class="item-note" style="margin-right: -1.6rem;margin-top: -5px">
+                <ion class="ion ion-ios-minus-outline" style="font-size:25px;margin-right: 0.1rem" ng-click="minusProductNum()" class="grey"></ion>
+                <input type="number"  inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" ng-model="param.productNum"  style="display: inline-block;margin-top: -10px;text-align: center;width: 30%;" ng-click="inputBox()" >
+                <ion class="ion ion-ios-plus-outline" style="font-size:25px;margin-left: 0.1rem" ng-click="addProductNum()"></ion>
+            </p>-->
+            <p style="width: 164px;height: 32px;float: right;line-height: 32px;border: 1px solid #CCCCCC;background: #F2F5F9;border-radius: 2px;">
+                <span style="display: inline-block;width: 39.5px;height: 32px;color: #979797;line-height: 32px;text-align: center;border-right: 1px solid #979797;font-size:25px;" ng-click="minusProductNum()" >-</span><input type="number" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" ng-model="param.productNum" style="display: inline-block;width: 85px;color:#000000;height: 32px;line-height: 32px;margin-top: -10px;text-align: center;font-size: 20px;border:0px!important;background: #F2F5F9;font-size:20px;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"><span style="display: inline-block;width: 39.5px;height: 32px;color: #979797;line-height: 32px;text-align: center;border-left: 1px solid #979797;font-size:25px;" ng-click="addProductNum()">+</span>
+            </p>
+        </div>
+        <!--点击加入购物车-->
+        <ul style="list-style: none;width: 100%;height: 1rem;display: flex;flex-wrap: wrap;justify-content: space-around;text-align: center;margin-top: 26.5px">
+            <li style="background: red;color:white;font-size:0.36rem;width: 50%;height: 1rem;line-height: 1rem" ng-click="goPay()" id="goPay">立即购买</li>
+        </ul>
+    </div>
+    <!--点击购买数量出现的弹框-->
+   <!-- <div class="inputModel" ng-show="inputModel" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 999999;background: #000;opacity: 0.85" ng-click="hiddenBox()"></div>
+    <div class="inputModel" ng-show="inputModel" style="width: 236px;height: 150px;background:#FFFFFF;border-radius: 6px;position: absolute;left: 50%;top: 50%;margin-top: -75px;margin-left: -118px;z-index: 9999999999">
+       <p style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000000;letter-spacing: 0;line-height: 22px;text-align: center;margin-top: 16px">修改购买数量</p>
+        <p style="margin-top: 21px;float: none!important;text-align: center"  class="item-note">
+            <ion class="ion ion-ios-minus-outline" style="font-size:25px;margin-right: 0.1rem" ng-click="minusProductNum()" class="grey"></ion>
+            <input type="number"  inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" ng-model="param.productNum"  style="display: inline-block;margin-top: -10px;text-align: center;width: 30%;" ng-click="inputBox()">
+            <ion class="ion ion-ios-plus-outline" style="font-size:25px;margin-left: 0.1rem" ng-click="addProductNum()"></ion>
+        </p>
+        &lt;!&ndash;按钮&ndash;&gt;
+        <ul style="list-style: none;width: 100%;height: 36px;display: flex;flex-wrap: wrap;justify-content: space-around;text-align: center;margin-top: 25px">
+            <li style="background:#F2F5F9;;color:#4A4A4A;font-size:0.36rem;width: 50%;height:36px;line-height:36px;border-bottom-left-radius:6px;" ng-click="cancel()">取消</li>
+            <li style="background: #FF6666;color:white;font-size:0.36rem;width: 50%;height: 36px;line-height:36px;border-bottom-right-radius:6px;" ng-click="Determine()">确定</li>
+        </ul>
+    </div>-->
+</ion-view>

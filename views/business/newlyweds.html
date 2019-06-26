@@ -1,0 +1,8 @@
+<ion-view>
+    <ion-content>
+         <div style="height:136px;width:7.50rem;" ng-repeat="item in param.productList">
+            <img ng-src="{{item.firstUrl}}" ng-click="enterDetails(item.productId)"
+                 style="width: 7.5rem;height: 136px;margin: 10px auto"/>
+        </div>
+    </ion-content>
+</ion-view>

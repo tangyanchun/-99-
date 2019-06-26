@@ -1,0 +1,23 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <ion-refresher pulling-text="下拉获取更多店铺交易明细" on-refresh="getMoreTransactionList()">
+        </ion-refresher>
+        <div class="list">
+            <a class="item" ng-repeat="item in param.transactionList"
+               ui-sref="specialTransactionDetail({'orderId':item.orderId})">
+                <p style="font-size: 0.24rem;color: #999999">
+                    <span>交易单号:</span>
+                    <span>{{item.orderId}}</span>
+                </p>
+                <p style="font-size: 0.24rem;color: #999999">
+                    <span>交易金额:</span>
+                    <span>{{item.account}}</span>
+                </p>
+                <p style="font-size: 0.24rem;color: #999999">
+                    <span>交易时间:</span>
+                    <span>{{item.createDate|date:'yyyy-MM-dd'}}</span>
+                </p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

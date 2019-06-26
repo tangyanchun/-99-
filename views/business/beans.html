@@ -1,0 +1,303 @@
+<ionic-view style="background: #ebedf3">
+    <style>
+        ul li{width: 14.285%;font-size: 20px;text-align: center;color: #cccccc;margin: auto}
+        .redDay{color: red;font-size: 14px;margin-top: 11px}
+        .greyDay{color: grey;font-size: 14px;margin-top: 11px}
+        .scroll{height:100%!important;}
+
+        /*弹窗的样式*/
+        .redPacket {
+            position: relative;
+            width: 100%;
+            margin: auto;
+        }
+        .redPacket img{
+            width: 100%;
+        }
+        #lottery{      width: 100%;
+            /* margin: 0 auto; */
+            background: url(images/rollBg1.png) no-repeat;
+            background-position-x: -2px;
+            background-position-y: 8px;
+            background-size: 101% 96%;
+            /* background-size: 100%; */
+            padding-bottom: 25%;
+            padding-top: 13.5%;}
+        #lottery table td{width:20%;text-align:center;vertical-align:middle;font-size:24px;color:#333;font-index:-999;}
+        #lottery table td a{
+            width: 86%;
+            padding-bottom: 35%;
+            padding-top: 50%;
+            display: block;
+            text-decoration: none;
+            margin-top: 1px;
+            margin-bottom: 2px;
+            margin-left: 7.8%;
+        }
+        #lottery table td.active img{border-radius: 10px;
+            box-shadow: 0 0 0 3px #1fd5ff;}
+        .start{background:url(images/rollBtn.png) no-repeat;background-size: contain;}
+        #lottery table td span{
+            font-size: 12px;
+            position: absolute;
+            bottom: 14%;
+            display: inline-block;
+            width: 100%;
+            left: 50%;
+            transform: translate(-45%);
+            transform:translate(-45%);
+            -ms-transform:translate(-45%);	/* IE 9 */
+            -moz-transform:translate(-45%);/* Firefox */
+            -webkit-transform:translate(-45%); /* Safari 和 Chrome */
+            -o-transform:translate(-45%); 	/* Opera */
+            color:#ff0000;
+        }
+        span.commonRow {
+            transform: translate(-57%) !important;
+            transform:translate(-57%) !important;
+            -ms-transform:translate(-57%) !important;	/* IE 9 */
+            -moz-transform:translate(-57%) !important;/* Firefox */
+            -webkit-transform:translate(-57%) !important; /* Safari 和 Chrome */
+            -o-transform:translate(-57%) !important; 	/* Opera */
+        }
+        tr{
+            width: 90%;
+        }
+        .row1 .lottery-unit img{
+            width: 82%;
+            margin: 0 auto;
+            /*margin-top: 30%;*/
+            /*margin-left: 8%;*/
+
+        }
+        .lottery-unit img{
+            width: 82%;
+        }
+        /*.rowlast .lottery-unit img{*/
+
+            /*margin-top: -43%;%;*/
+
+        /*}*/
+        .row1 .lottery-unit-0 img{
+            width: 82%;
+            margin: 0 auto;
+            /*margin-top: 30%;*/
+            /*margin-left: 18%;*/
+        }
+        .callUpDialog{
+            position: fixed;
+            bottom: 30%;
+            right: 2%;
+            width: 20%;
+            z-index: 8;
+        }
+        .bonusImg:nth-child(odd){/*奇数*/
+           border-bottom: 1px solid #F2F2F2;
+            border-right: 1px solid #F2F2F2;
+        }
+        .bonusImg:nth-child(even){/*偶数*/
+            border-bottom: 1px solid #F2F2F2;
+        }
+        .bonusImg:nth-last-child(2)
+        {
+            border-bottom: 0px;
+        }
+        .bonusImg:last-child
+        {
+            border-bottom: 0px;
+        }
+    </style>
+    <ion-content>
+        <div style="width: 100%;background: #ffffff">
+        <div style="width: 95%;background-size: 100% 100%;padding-top:1px;padding-bottom: 28px;margin: 0 auto">
+            <div style="position: absolute;top: 20px;right: 10px;height: 36px;">
+                <p style="color: #333333;font-size: 15px;margin-bottom: 24px" ng-click="isLoginClickEvent('transactions')">交易列表<i style="font-size: 17px;margin-left: 10px;margin-right: 5px" class="ion ion-ios-arrow-right"></i></p>
+            </div>
+            <img src="images/bonusLogin.png" style="width: 100%;margin-top: 50px;height: 200px;box-shadow: 0px 4px 20px #ebebeb;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px" ng-if="!param.isLogin" ng-click="isLoginClickEvent('login')">
+            <!--点击跳到分享赚钱页面-->
+            <img src="images/bounsShare.png" style="margin-top: 13px;width: 100%;height: 200px;box-shadow: 0px 4px 20px #ebebeb;" ng-click="isLoginClickEvent('share')" ng-if="!param.isLogin">
+            <img src="images/bounsShare.png" style="margin-top: 13px;width: 100%;height: 200px;box-shadow: 0px 4px 20px #ebebeb;margin-top: 50px" ng-click="isLoginClickEvent('share')" ng-if="param.isLogin">
+            <!--签到-->
+            <div style="width:100%;min-height: 400px;background-image: url('images/bounsSignBg.png');margin-top: 20px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 0px 4px 20px #ebebeb;">
+                <div style="width: 100%;text-align: center;padding-top: 20px">
+                    <img src="images/every_03.png" style="width: 133px;margin:0 auto;">
+                    <div style="margin-top: 22px">
+                        <p  style="width: 134px;height:38px;margin: 0 auto;color: #f170be;font-size: 20px;font-weight: bold;background: #ffffff;border-radius: 19px;line-height: 38px" ng-click="isLoginClickEvent('sign')" ng-if="!param.sign">点我签到</p>
+                        <p  style="width: 134px;height: 38px;margin: 0 auto;color: #f170be;font-size: 20px;font-weight: bold;background: #ffffff;border-radius: 19px;line-height: 38px" ng-click="isLoginClickEvent('finishSign')" ng-if="param.sign">已签到</p>
+                    </div>
+                    <p style="color: #ffffff;font-size: 17px;margin-top: 17px;margin-bottom: 18px;letter-spacing: 3px;font-weight: bold">您已获得<span style="font-size: 20px;font-weight: bold">{{bonusPoints}}</span> <span style="font-size: 18px">享豆</span></p>
+                    <img src="images/yellow_03.png" alt="" style="width: 175px;height: 28px;margin:0 auto;;margin-bottom: 11px">
+                    <p style="color: #ffffff;font-size: 15px;padding-bottom: 5px;border-bottom: 1px
+     solid #ffffff;width: 50px;margin: 0 auto;letter-spacing: 5px;" ng-click="isLoginClickEvent('rule')">规则</p>
+                </div>
+                <div style="width: 90%;min-height:140px;margin: 0 auto;background: #ffffff;border-radius: 20px;">
+                    <ul style="width: 100%;display: flex;flex-wrap: wrap;justify-content: space-around;margin-top: 10px">
+                        <li ng-repeat="item in sevenDay" style="margin-top: 28px">
+                            <img ng-src="{{item.bounsImages.redImg}}" ng-if="item.punchClockStatus=='1'"  style="width: 32px;height: 45px;margin: 0 auto;">
+                            <img ng-src="{{item.bounsImages.greyImg}}" ng-if="item.punchClockStatus=='0'" style="width: 32px;height: 45px;margin: 0 auto;">
+                            <p ng-class="item.punchClockStatus =='0'?'greyDay':'redDay'">{{item.days}}</p>
+                        </li>
+                    </ul>
+                    <div style="margin: 0 auto;color:#333333;font-size: 15px;text-align: center;margin-top:18px;font-weight:bold;padding-bottom: 18px">您已经连续签到<span style="font-size: 18px;color:rgb(255,92,32);margin-left: 10px;margin-right: 10px">{{totlePunch}}</span>天</div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--用户抽奖-->
+        <div   style="background-color: #ffffff;margin-top: 18px;">
+            <div class="redPacket" style="padding-top: 6%;padding-bottom: 7%;">
+                <img style="width:70%;margin:0 auto;margin-bottom: -13%" src="images/rollTitle1.png" alt=""/>
+                <div id="lottery" >
+                    <table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <tr class='row1'>
+                            <td class="lottery-unit lottery-unit-0">
+                                <div style="position: relative;left: 31%;">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                <img ng-src='{{param.data[0].url}}'>
+                                    <span ng-bind="param.data[0].name" ></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-1">
+                                <div style="position: relative;left: 16.5%;">
+                                    <img src="{{param.data[1].url}}">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[1].name">
+                                        888
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-2">
+                                <div style="position: relative;left: 1%">
+                                    <img src="{{param.data[2].url}}">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[2].name"></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-3">
+                                <div style="position: relative;left: -13.8%">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <img src="{{param.data[3].url}}">
+                                    <span ng-bind="param.data[3].name"></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-4">
+                                <div style="position: relative;left: -28%;">
+                                    <img src="{{param.data[4].url}}">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[4].name"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="lottery-unit lottery-unit-15">
+                                <div style="position: relative;left: 39%;margin-top: 2px;">
+                                    <img src="{{param.data[15].url}}" >
+                                    <!--<img src="images/享豆_03.png" alt="" >-->
+                                    <span ng-bind="param.data[15].name" class="commonRow"></span>
+                                </div>
+                            </td>
+                            <td colspan="3" rowspan="3"><a href=""class='start'></a></td>
+                            <td class="lottery-unit lottery-unit-5">
+                                <div style="position: relative;left: -19%;margin-top: 2px;">
+                                    <img src="{{param.data[5].url}}" >
+                                    <!--<img src="images/享豆_03.png" alt="" >-->
+                                    <span ng-bind="param.data[5].name" class="commonRow"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="lottery-unit lottery-unit-14">
+                                <div style="position: relative;left: 39%; margin-top: 2px;">
+                                    <img src="{{param.data[14].url}}" >
+                                    <!--<img src="images/享豆_03.png" alt="" >-->
+                                    <span ng-bind="param.data[14].name" class="commonRow"></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-6">
+                                <div style="position: relative;left: -19%;margin-top: 2px;">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <img src="{{param.data[6].url}}" >
+                                    <span ng-bind="param.data[6].name" class="commonRow"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="lottery-unit lottery-unit-13">
+                                <div style="position: relative;left: 39%;">
+                                    <img src="{{param.data[13].url}}" ">
+                                    <!--<img src="images/享豆_03.png" alt="" >-->
+                                    <span ng-bind="param.data[13].name" class="commonRow" >888积分</span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-7">
+                                <div style="position: relative;    left: -19%;">
+                                    <img src="{{param.data[7].url}}" style=" ">
+                                    <!--<img src="images/享豆_03.png" alt="" >-->
+                                    <span ng-bind="param.data[7].name" class="commonRow"></span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="row1 rowlast">
+                            <td class="lottery-unit lottery-unit-12">
+                                <div style="position: relative;left: 30%;">
+                                    <img src="{{param.data[12].url}}">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[12].name"></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-11">
+                                <div style="position: relative;left:15%">
+                                    <img src="{{param.data[11].url}}" >
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[11].name"></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-10">
+                                <div style="position: relative;left: 1%">
+                                    <img src="{{param.data[10].url}}">
+                            <!--<img src="images/享豆_03.png" alt="">-->
+                            <span ng-bind="param.data[10].name"></span>
+                </div>
+                </td>
+                            <td class="lottery-unit lottery-unit-9">
+                                <div style="position: relative;left: -13.8%">
+                                    <img src="{{param.data[9].url}}">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[9].name"></span>
+                                </div>
+                            </td>
+                            <td class="lottery-unit lottery-unit-8">
+                                <div style="position: relative;left: -29%">
+                                    <img src="{{param.data[8].url}}">
+                                    <!--<img src="images/享豆_03.png" alt="">-->
+                                    <span ng-bind="param.data[8].name"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--<img src="images/rollWhiteBtn.png" ng-click="closeRollDig();event.stopPropagation()"  class="close1">-->
+            </div>
+        </div>
+        <!--积分换购-->
+        <div ng-if="bonusPointsProductInfo.length>0" style="width: 95%;margin: 0 auto">
+            <p style="margin-left: 2px;margin-top: 13px;font-size: 17px;color: #333333;font-weight: bold">享豆兑换</p>
+            <div class="list"  style="margin-top: 12px;background: #ffffff;border-radius: 4px">
+                <div class="row row-wrap"  style="padding: 0px">
+                    <div class="col col-50 bonusImg" ng-repeat="item in bonusPointsProductInfo" ng-click="enterDetails(item)" style="padding: 0px" >
+                        <img class="full-image " ng-src="{{item.url}}" style=";margin: auto" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 20px;margin-top: 5%;">
+            <img src="images/bounsNomore.png" style="width: 100%">
+        </div>
+
+    </ion-content>
+        <!--进首页弹出页面-->
+
+
+
+</ionic-view>

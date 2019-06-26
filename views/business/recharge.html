@@ -1,0 +1,103 @@
+<ion-view style="background: #ffffff">
+    <style>
+
+        .swiper-container {
+            width: 100%;
+            height: 200px!important;
+        }
+        .swiper-slide {
+            width: 100%;
+            height: 200px;
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-slide img{width: 100%}
+
+        .swiper-pagination-bullet {
+            width: 16.6%;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 12px;
+            color:grey;
+            opacity: 1;
+            background: #ffffff;
+            border-radius: 0px!important;
+        }
+        .swiper-pagination-bullet:nth-child(1){
+            width: 13%;
+        }
+        .swiper-pagination-bullet:nth-child(2){
+            width: 13%;
+        }
+        .swiper-pagination-bullet:nth-child(3){
+            width: 13%;
+        }
+        .swiper-pagination-bullet:nth-child(6){
+            width: 18.6%;
+        }
+        .swiper-pagination-bullet-active {
+            color:#000;
+            font-size: 15px;
+            background: #ffffff;
+            border-bottom: 1px solid red;
+        }
+        .swiper-pagination{
+            width: 100%;;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 0px!important;
+            margin-top: -25px;
+        }
+    </style>
+    <ion-content>
+       <!-- <div class="list card">
+            <a class="item item-body" style="background:white;height:4rem">
+                <p>
+                    <span style="font-size: 15px;color: #333333">充值到:</span>
+                    <span style="color:#6D9Fe1;font-size: 15px">美享储值账户</span>
+                </p>
+                <p>
+                    <input type="tel" id ="amount" placeholder="请输入充值金额" style="position:absolute;font-size:18px;margin-left: 90px;margin-top: 32px;">
+                </p>
+                <p style="margin-top: 50px;font-size: 20px;margin-left: 10px;">
+                    <u style="margin-top: 45px;font-size:20px;margin-left: 50px;">￥</u>
+                </p>
+            </a>
+        </div>-->
+        <div class="swiper-container swiper-container-horizontal">
+            <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-12294px, 0px, 0px);" >
+                <div class="swiper-slide" ><img src="images/100_03.png"></div>
+                <div class="swiper-slide" ><img src="images/300_03.png"></div>
+                <div class="swiper-slide" ><img src="images/500_06.png"></div>
+                <div class="swiper-slide" ><img src="images/1000_03.png"></div>
+                <div class="swiper-slide" ><img src="images/5000_03.png"></div>
+                <div class="swiper-slide" ><img src="images/10000_03.png"></div>
+            </div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
+        <div style="text-align: center">
+            <button class="button  button-positive transmit"
+                    style="margin-top:2rem;width: 6.9rem;height:0.88rem;background-color:#ea3385;font-size:0.34rem;border-radius: 0.46rem" ng-click="payAccount()">
+            </button>
+        </div>
+        <div style="text-align: center">
+            <button class="button  button-positive"
+                    style="margin-top:1rem;width: 6.9rem;height:0.88rem;background-color:#11c1f3;font-size:0.34rem;border-radius: 0.46rem" ng-click="goRechargeAccount()">
+                查看个人储值账户
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

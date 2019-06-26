@@ -1,0 +1,29 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <div class="list">
+            <p class="item body" ng-repeat="item in param.transactionDetailData">
+                <a style="font-size:0.26rem;color:#333333">
+                    <span>交易流水号：</span>
+                    <span>{{item.transactionId}}</span>
+                </a>
+                <a style="font-size:0.26rem;color:#333333">
+                    <span>交易订单号：</span>
+                    <span>{{item.orderId}}</span>
+                </a>
+                <a style="font-size:0.26rem;color:#333333">
+                    <span>交易金额：</span>
+                    <span style="float:center;">{{item.amount}}</span>
+                </a>
+                <a style="font-size:0.26rem;color:#333333">
+                    <span>支付类型：</span>
+                    <span style="float:center;">微信支付</span>
+                </a>
+                <a style="font-size:0.26rem;color:#333333">
+                    <span>交易时间：</span>
+                    <span style="float:center;">{{item.payDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </a>
+
+            </p>
+        </div>
+    </ion-content>
+</ion-view>

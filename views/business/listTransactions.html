@@ -1,0 +1,23 @@
+<ion-view>
+    <ion-content>
+            <div ng-show="!param.picFlag" ng-repeat="item in punchClock">
+                    <p class="item" ng-if="item.transactionId=='punchClock'">签到<br><span style="margin-top: 10px;display: inline-block">{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</span><span style="float: right">+{{item.amount}}</span></p>
+
+                    <p class="item" ng-if="item.transactionId!='newUser'&&item.transactionId!='punchClock'&&item.transactionId!='gift'&&item.amount!='0'&&item.transactionId!='bonusPoints'" >购物折扣<br><span style="margin-top: 10px;display: inline-block">{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</span><span style="float: right" >-{{item.amount}}</span></p>
+
+                    <p class="item" ng-if="item.transactionId=='newUser'">推荐好友<br><span style="margin-top: 10px;display: inline-block">{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</span><span style="float: right">+{{item.amount}}</span></p>
+
+                    <p class="item" ng-if="item.transactionId=='gift'">抽奖<br><span style="margin-top: 10px;display: inline-block">{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        <span style="float: right" ng-if="item.status==1">+{{item.amount}}</span>
+                        <span style="float: right" ng-if="item.status==2">-{{item.amount}}</span>
+                    </p>
+                <p class="item" ng-if="item.transactionId=='bonusPoints'">消费<br><span style="margin-top: 10px;display: inline-block">{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</span><span style="float: right">-{{item.amount}}</span></p>
+            </div>
+
+
+            <div ng-show="param.picFlag" style="margin: 0 auto;width: 5rem;height: 4rem;margin-top: 103px;font-size: 18px">
+                <img src="images/viod.png" style="width: 125px;height: 162px;margin: auto">
+                <p style="margin-top: 13px;color: #666666;text-align: center;">暂无交易记录</p>
+            </div>
+    </ion-content>
+</ion-view>

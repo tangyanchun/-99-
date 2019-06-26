@@ -1,0 +1,99 @@
+<ionic-view style="background: #f5f5f5">
+    <style>
+        .checkBg{background: #FF6666;font-family: PingFang-SC-Medium;  font-size: 14px;  color: #FFFFFF;  letter-spacing: 0.33px;  line-height: 14px;}
+        .noCheckBg{background: #FFFFFF;font-family: PingFang-SC-Medium;  font-size: 14px;  color: #4A4A4A;  letter-spacing: 0.33px;
+            line-height: 14px;}
+        .colff{color: #FFFFFF}
+        .col56{color: #656565}
+    </style>
+    <div style="position:fixed;width:100%;background: #fff;z-index:5">
+        <ion-list>
+            <ion-item class="item-input" style="background: border-box;padding: 10px;background: #ffffff">
+                <span class="item-input-wrapper" style="height:30px;border-radius: 58px" >
+                        <i class="icon ion-ios-search placeholder-icon" ></i>
+                        <input id="search" type="search" placeholder="补水五件套" ng-click="search()">
+                 </span>
+            </ion-item>
+        </ion-list>
+        <!--切换-->
+        <div class="row" style="width: 100%;height: 40px;line-height: 40px;background: #ffffff!important;margin-top: 10px;padding: 0px">
+            <div class="col col-25" style="ont-family: PingFang-SC-Medium;font-size: 14px;letter-spacing: 0.33px;line-height: 28px;text-align: center" ng-click="checkType('')" ng-class="{'checkBg':param.orderType=='','noCheckBg':param.orderType!=''}">
+                综合
+            </div>
+            <div class="col col-25" style="ont-family: PingFang-SC-Medium;font-size: 14px;letter-spacing: 0.33px;line-height: 28px;text-align: center"  ng-click="checkType('sellNum')" ng-class="{'checkBg':param.orderType=='sellNum','noCheckBg':param.orderType!='sellNum'}">
+                销量
+            </div>
+            <div class="col col-25" style="ont-family: PingFang-SC-Medium;font-size: 14px;letter-spacing: 0.33px;line-height: 28px;text-align: center;position: relative" ng-class="{'checkBg':param.orderType=='price','noCheckBg':param.orderType!='price'}"
+                 ng-click=" checkType('price')">
+                <p>价格</p>
+                <p style="position: absolute;top:1px;right: 15px">
+                    <i class="ion-arrow-up-b " style='display: block;height: 10px;'  ng-class="{'colff':param.orderType == 'price'&&param.orderBy=='asc','col56':param.orderType == 'price'&&param.orderBy!='asc'}" ></i>
+                    <i class="ion-arrow-down-b " style='display: block;height: 10px;'  ng-class="{'colff':param.orderType == 'price'&&param.orderBy=='desc','col56':param.orderType == 'price'&&param.orderBy!='desc'}"></i>
+                </p>
+            </div>
+            <div class="col col-25" style="ont-family: PingFang-SC-Medium;font-size: 14px;color: #4A4A4A;letter-spacing: 0.33px;line-height: 28px;text-align: right" ng-click="transformation()">
+                <img src="images/Horizontal.png" style="width: 16px;height: 16px;float: right;margin-right: 10px;margin-top: 8px" ng-if="param.Horizontal">
+                <img src="images/Vertical%20.png" style="width: 16px;height: 16px;float: right;margin-right: 10px;margin-top: 8px" ng-if="!param.Horizontal">
+            </div>
+        </div>
+    </div>
+    <ion-content>
+        <div style="margin-top:112px;">
+            <div class="list" ng-repeat="item in param.productList" style="background: #FFFFFF;margin-top: 10px;margin-bottom: 10px" ng-if="param.Horizontal && item.productPrefecture !=10" ng-click="enterDetails(item.productId)">
+                <ion-item class="row" style="border-color:#FFFFFF!important;border-width:0px!important;border-style:none!important;">
+                    <div class="col col-40">
+                        <img  ng-src="{{item.firstUrl}}" style="width: 100%">
+                    </div>
+                    <div class="col col-60" >
+                        <p style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 16px;margin-top: 18px">{{item.productName}}</p>
+                        <p style="font-family: PingFangSC-Regular;font-size: 16px;color: #FF6666;letter-spacing: 0;line-height: 16px;margin-top: 16px">￥{{item.price}}</p>
+                        <p style="margin-top: 6px"><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;line-height: 12px;">零售价<del>¥{{item.productDetail.productMarketPrice}}</del></span><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;line-height: 12px;margin-left: 26px">销量{{item.productDetail.productSalesVolume}}</span></p>
+                        <p style="background: #4ae;
+                                    border: 1px solid #4ae;
+                                    border-radius: 100px;
+                                    width: 135px;
+                                    height: 24px;
+                                    font-family: PingFangSC-Regular;
+                                    font-size: 12px;
+                                    color: #FFFFFF;
+                                    letter-spacing: 0;
+                                    line-height: 20px;
+                                    text-align: center;
+                                    margin-top: 14px;" ng-if="item.price/item.productDetail.productMarketPrice<=0.999">
+                            美享专享：{{item.price/item.productDetail.productMarketPrice|discountFilter}}&nbsp;折
+                        </p>
+                        <p style="background: #FF6666;border: 1px solid #FF6666;border-radius: 100px;width: 86px;height: 22px;font-family: PingFangSC-Regular;font-size: 14px;color: #FFFFFF;letter-spacing: 0;line-height: 20px;text-align: center;margin-top: 14px;float: right;margin-right: 7px">立即购买</p>
+                    </div>
+                </ion-item>
+            </div>
+            <!--产品竖版-->
+            <div class="list"  style="background: #FFFFFF;margin-top: 12px"  ng-if="!param.Horizontal" ng-click="enterDetails(item.productId)">
+                <div class="row row-wrap">
+                    <div class="col col-50" ng-repeat="item in param.productList" ng-if="item.productPrefecture !=10" >
+                        <img class="full-image" ng-src="{{item.firstUrl}}" style="height: 168px;margin: auto">
+                        <p style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 16px;margin-top: 10px;margin-left: 15px">{{item.productName}}</p>
+                        <p style="font-family: PingFangSC-Regular;font-size: 16px;color: #FF6666;letter-spacing: 0;line-height: 16px;margin-top: 6px;margin-left: 15px">￥{{item.price}}</p>
+                        <p style="font-size: 12px;margin-top: 6px;margin-bottom: 24px;margin-left: 15px"><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;">零售价<del>¥{{item.productDetail.productMarketPrice}}</del></span><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;margin-left: 26px">销量{{item.productDetail.productSalesVolume}}</span></p>
+                        <p style="background: #4ae;
+                                    border: 1px solid #4ae;
+                                    border-radius: 100px;
+                                    width: 135px;
+                                    height: 24px;
+                                    font-family: PingFangSC-Regular;
+                                    font-size: 12px;
+                                    color: #FFFFFF;
+                                    letter-spacing: 0;
+                                    line-height: 20px;
+                                    text-align: center;
+                                    margin-top: 14px;" ng-if="item.price/item.productDetail.productMarketPrice<=0.999">
+                            美享专享：{{item.price/item.productDetail.productMarketPrice|discountFilter}}&nbsp;折
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--产品横排-->
+
+    </ion-content>
+</ionic-view>

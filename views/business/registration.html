@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td{
+            border:1px solid #FFF283;
+            vertical-align: middle;text-align: center
+        }
+        td input{background:rgba(255,255,255,0) !important;color: white!important;}
+        input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+            color:white;
+            font-size:16px;
+        }
+
+        input:-moz-placeholder,textarea:-moz-placeholder{
+            color:white;
+            font-size:16px;
+        }
+
+        input::-moz-placeholder,textarea::-moz-placeholder{
+            color:white;
+            font-size:16px;
+        }
+        input:-ms-input-placeholder,textarea:-ms-input-placeholder{
+            color:white;
+            font-size:16px;
+        }
+        table{
+            width:90%;
+            height: 30%;
+            margin: auto;
+            color: #FFF283;
+            font-size: 10px!important;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table tr{
+            height:30px;
+        }
+        table tr:nth-child(1){
+            height:30px;
+        }
+        table tr:nth-child(2){
+            height:30px;
+        }
+        table tr:nth-child(3){
+            height:30px;
+        }
+        table tr:nth-child(4){
+            height:30px;
+        }
+        table tr:nth-child(5){
+            height:30px;
+        }
+        table tr:nth-child(6){
+            height:30px;
+        }
+        table tr:nth-child(7){
+            height:30px;
+        }
+        table tr:nth-child(8){
+            height:30px;
+        }
+        table tr:nth-child(9){
+            height:30px;
+        }
+        table tr:nth-child(10){
+            height:30px;
+        }
+        table tr:nth-child(11){
+            height:30px;
+        }
+        table tr:nth-child(12){
+            height:30px;
+        }
+        table tr:nth-child(13){
+            height:30px;
+        }
+        table tr:nth-child(14){
+            height:100px;
+        }
+
+        table tr:nth-child(1) td:nth-child(1){
+            width: 46px;
+        }
+        table tr:nth-child(1) td:nth-child(2){
+            width: 60px;
+            padding:10px;
+        }
+        table tr:nth-child(1) td:nth-child(3){
+            width: 90px;
+        }
+        .logo{width: 222px;height: 68px;margin-left: 30px}
+        .p1{font-size: 14px;margin-left: 5%;margin-top: 10px;font-family:PingFang-SC-Regular;
+            font-weight:400; color:rgba(255,242,131,1);}
+        .p2{font-size: 14px;margin-left: 5%;margin-top: 10px;font-family:PingFang-SC-Regular;
+            font-weight:400;  color:rgba(255,242,131,1);}
+        .baoming{width:150px;height:30px;margin: auto;margin-top: 10px}
+        .wangzhe{width: 200px;height: 20px;margin: auto;margin-top: 10px}
+        .tijiao{width: 120px;height: 30px;margin: auto;margin-top: 15px;margin-bottom: 30px}
+        .p3{font-size: 13px;font-family:PingFang-SC-Regular;
+            font-weight:400; color:rgba(255,242,131,1);text-align: left;margin-top: 2px;margin-left: 10px}
+    </style>
+</head>
+<body >
+<div style="width: 100%;height:100%;background:url('images/bgC.jpg') no-repeat;overflow-y: scroll">
+   <img src="images/logo.png" alt="" class="logo">
+    <img src="images/baomingbiao.png" class="baoming">
+    <p class="p1">*参加【首届总裁创享会】请详细填写参会报名表</p>
+    <p class="p2">*会议期间，我们将全程带您进行了解，请参会总裁予以配合</p>
+   <!-- <img src="images/tables.png" class="tableBox">-->
+    <table >
+        <tr>
+            <td rowspan="12" >
+                <div >
+                    参会总裁信息
+                </div>
+            </td>
+            <td >
+                <div >姓名</div>
+            </td>
+            <td ><input type="text" ng-model="param.SaveShopUserOrderInfo.name"></td>
+        </tr>
+        <tr>
+            <td >性别</td>
+            <td ><input type="text" ng-model="param.SaveShopUserOrderInfo.sex"></td>
+        </tr>
+        <tr>
+            <td >联系方式</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.mobile"></td>
+        </tr>
+        <tr>
+            <td >身份证号</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.idNo"></td>
+        </tr>
+        <tr>
+            <td >区域</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.area"></td>
+        </tr>
+        <tr>
+            <td >服装要求</td>
+            <td >盛装出席</td>
+        </tr>
+        <tr>
+            <td >
+                <p >姓名</p>
+                <p>(陪同人员)</p>
+            </td>
+            <td >
+                <div >
+                    <input type="text" ng-model="param.SaveShopUserOrderInfo.escortName">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td ><input type="text" ng-model="param.SaveShopUserOrderInfo.escortSex"></td>
+        </tr>
+        <tr>
+            <td >联系方式</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.escortMobile"></td>
+        </tr>
+        <tr>
+            <td >身份证号</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.escortIdNo"></td>
+        </tr>
+        <tr>
+            <td >投资品牌级别</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.investBrandLevel"></td>
+        </tr>
+        <tr>
+            <td >从事行业</td>
+            <td ><input type="text"  ng-model="param.SaveShopUserOrderInfo.industry"></td>
+        </tr>
+        <tr>
+            <td rowspan="2" >参会安排</td>
+            <td >11月16日</td>
+            <td colspan="3"  >抵达北京，总部洽谈接待，办理酒店入住</td>
+        </tr>
+        <tr>
+            <td >11月17日</td>
+            <td colspan="3" >
+                <p class="p3">*总裁盛会，企业发展介绍，企业大项目介绍</p>
+                <p class="p3">*董事长晨董见面会：唯美度未来的战略布局规划</p>
+                <p class="p3">*晨董：座谈会</p>
+            </td>
+        </tr>
+    </table>
+
+   <img src="images/wangzhe.png" class="wangzhe">
+    <div><img src="images/tijiao.png" alt="" class="tijiao" ng-click="comit()"></div>
+</div>
+</body>
+</html>

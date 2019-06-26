@@ -1,0 +1,19 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <ion-refresher pulling-text="下拉获取更多收支明细" on-refresh="getMoreRechargeAccountRecordList()">
+        </ion-refresher>
+        <div class="list">
+            <p style="font-size: 0.5rem;color: #999999" align="center" ng-if="param.rechargeAccountRecordList==null">无更多收支明细！</p>
+            <a class="item" ng-repeat="item in param.rechargeAccountRecordList" ng-if="item.amount!=0">
+                <p class="item-note">
+                    <span style="display: inline-block;margin-top: 14px">{{item.amount}}</span>
+                </p>
+                <h1 style="margin-top: 10px;font-size: 0.32rem;color: #333333;" ng-if="item.type==0">充值</h1>
+                <h1 style="margin-top: 10px;font-size: 0.32rem;color: #333333;" ng-if="item.type==1">消费</h1>
+                <h1 style="margin-top: 10px;font-size: 0.32rem;color: #333333;" ng-if="item.type==2">赠送</h1>
+                <h1 style="margin-top: 10px;font-size: 0.32rem;color: #333333;" ng-if="item.type==3">退款</h1>
+                <p style="margin-top: 10px;font-size: 0.24rem;color: #999999;">{{item.createDateString}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

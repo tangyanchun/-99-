@@ -1,0 +1,33 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <style>
+            /*input[checked="checked"]{
+                background: #e5e5e5;
+            }*/
+        </style>
+        <!--收货地址没有的时候-->
+        <div class="addressNull" style="margin: 0 auto;width: 3rem;height: 4rem;margin-top: 3.12rem" >
+            <img src="images/addressmanageNull.png" style="width: 2.23rem;height: 1.76rem;margin: auto">
+            <p style="font-size: 0.3rem;color: #333333;margin-top: 0.68rem;text-align: center">收货地址在哪里~</p>
+        </div>
+        <div class="list" ng-repeat="item in userAddressList" style="margin-top:0.5rem">
+            <div class="item" ng-click="goBackLastPage(item.id)">
+                <p>{{item.userName}}<span style="float:right;margin-right:0.4rem">{{item.userPhone}}</span></p>
+                <ion class="ion ion-ios-arrow-right item-note" style="font-size: 20px"></ion>
+                <p style="margin-top: 10px">{{item.province+item.city+item.detailAddress}}</p>
+            </div>
+            <div class="item" style="height:0.9rem">
+                <input type="radio" ng-click="setDefault(item)" ng-checked="item.status=='1'" style="-webkit-appearance: radio;">
+               <!-- style="width: 15px;height:15px;border: 1px solid #e5e5e5;border-radius: 50%"-->
+                <span style="font-size:0.25rem;">设为默认</span>
+                <span style="float:right;"ng-click="addressEdit('edit',item.id)">
+                     <ion class="ion ion-compose" style="font-size:0.3rem"></ion>
+                     &nbsp;<span style="font-size:0.25rem">编辑</span>
+                 </span>
+            </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-assertive" ng-click="addressEdit('add','')">
+        <div class="title" style="font-size: 0.34rem">添加新地址</div>
+    </div>
+</ion-view>

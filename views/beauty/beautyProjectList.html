@@ -1,0 +1,37 @@
+<ion-view style="background:white">
+    <ion-content style="height:100%">
+        <ion-refresher
+                pulling-text="下拉加载更多项目..."
+                on-refresh="doRefresh()">
+        </ion-refresher>
+        <div style="margin-bottom: 50px;">
+            <ion-list >
+                <div class="item item-divider">
+                    店内项目
+                </div>
+                <ion-item ng-repeat="item in param.shopProjectList" style="padding:5px 10px 5px 5px;">
+                    <div class="row" ng-click="chooseProject(item.id)">
+                        <div class="col col-10">
+                            <i class="icon ion-ios-checkmark-outline" style="color:deeppink;font-size:30px;margin-top:7px;position: absolute;" ng-if="shopAppointInfo.shopProjectIds.indexOf(item.id)==-1"></i>
+                            <i class="icon icon ion-ios-checkmark" style="color:deeppink;font-size:30px;margin-top:7px;position: absolute;" ng-if="shopAppointInfo.shopProjectIds.indexOf(item.id)!=-1"></i>
+                        </div>
+                        <div class="col col-80">
+                            <p style="font-weight:600;height:30px;font-size: 16px;">{{item.projectName}}</p>
+
+                            <p >{{item.projectDuration}}分钟</p>
+                        </div>
+                    </div>
+                    <i style="float:right;color:#979797;font-size: 30px;margin-top: -47px" class="ion ion-ios-arrow-right" ng-click="goDetails(item.id);event.stopPropagation()" ></i>
+                </ion-item>
+            </ion-list>
+        </div>
+
+    </ion-content>
+    <div class="tabs"
+          style="background:#e66;color:white;z-index: 1000;"
+          ng-click="confirmProject()">
+        <a class="tab-item" style="font-size:20px">
+            确认
+        </a>
+    </div>
+</ion-view>

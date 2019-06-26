@@ -1,0 +1,15 @@
+<ion-view style="background:white">
+    <div>
+        <center>
+            <img style="width:200px;border-radius:100px;margin-top: 30px" ng-src="{{param.appointInfo.clerkImage}}">
+            <p style="color:black;font-size:15px;margin-top:20px">{{param.appointInfo.sysClerkName}}</p>
+            <p style="color:#e42112;font-size:15px;margin-top:20px">----------&nbsp;{{param.appointInfo.appointStartTimeS}}&nbsp;----------</p>
+            <p style="color:black;font-size:15px;margin-top:10px">共计{{param.appointInfo.appointPeriod}}分钟</p>
+            <p style="color:black;font-size:15px;margin-top:10px">{{param.appointInfo.shopProjectName}}</p>
+            <p style="color:#e42112;font-size:15px;margin-top:40px">----------------&nbsp;捎话&nbsp;----------------</p>
+        </center>
+        <p style="color:black;font-size:15px;margin-top:15px;text-align: center">
+            {{param.appointInfo.detail}}
+        </p>
+    </div>
+</ion-view>

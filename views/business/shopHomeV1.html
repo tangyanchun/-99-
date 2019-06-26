@@ -1,0 +1,808 @@
+<ion-view style="background: #F5F5F5">
+    <style>
+        @-webkit-keyframes middle {
+            0% {
+                top: 300px;
+            }
+            100% {
+                top: -1300px;
+            }
+        }
+
+        @-webkit-keyframes move {
+            0% {
+                left: 600px;
+            }
+            100% {
+                left: -5650px;
+            }
+        }
+        #wraps{ width:800px;height:100px; position:absolute;margin:100px auto;top: -135px;overflow:hidden;left: 50px}
+        #list{ position:absolute;left:0;top:40px;margin:0;padding:0; -webkit-animation:30s move infinite linear; width:1500%;height:100%;}
+        #list li{ list-style:none;width:500px;height:150px; color:#4A4A4A; font:14px Arial; text-align:center; float:left;white-space: nowrap;}
+        #list li span{color: #f66667;}
+        #wraps:hover #list{ -webkit-animation-play-state:paused;}
+        @keyframes moveup {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+        .box {
+            /*animation: moveup 15s linear infinite;*/
+        }
+        .page {
+            overflow: hidden;
+            height: 230px
+        }
+
+        .box {
+            margin: 0;
+        }
+
+        .box li {
+            line-height: 30px;
+        }
+
+        .redPacket_box {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+            z-index: 10;
+        }
+
+        .redPacket {
+            position: relative;
+            width: 65%;
+            margin: auto;
+            margin-top: 40%;
+        }
+
+        .redPacket img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .redPacket .daynum {
+            position: absolute;
+            bottom: 44%;
+            left: 46%;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .redPacket .close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            /*background-color: #ffffff;*/
+            position: absolute;
+            top: 64px;
+            right: 32px;
+        }
+
+        .redPacket .close1 {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            /*background-color: #ffffff;*/
+            position: absolute;
+            top: 4px;
+            right: 4px;
+        }
+        /*底部切换*/
+        .footColor{color: #4A4A4A;}
+        .footActive{
+            color:#FC4B4B
+        }
+
+    </style>
+    <ion-content overflow-scroll="true" style="bottom: 48px;">
+        <!--顶部搜索-->
+        <div style="background: #ffffff;width: 100%;height: 56px;line-height: 56px;display: flex;justify-content: space-between">
+            <img src="images/meixiang_logo.png"
+                 style="height:25px;margin: 1.9% 2.1% 0.9% 2.7%;margin-top:15px">
+            <div style="height: 30px;margin: auto;position: relative;width:68%">
+                <i class="icon ion-ios-search placeholder-icon"
+                   style="position: absolute;left: 20px;top: -10px;font-size: 20px">
+                </i>
+                <input type="text" style="width:100%;background: #f5f5f5;
+                border: 0 solid #CCCCCC;border-radius:5px;padding-left:50px;"
+                       placeholder="请在这搜索你需要的商品" ng-click="search()">
+            </div>
+            <div style="width:3.5%;height:14px;background-color:#F00;
+                              border-radius:25px;position:absolute;right:10px;
+                              margin-top:10px" >
+                <span style="height:0.3rem; line-height:0.3rem; display:block; color:#FFF; text-align:center;font-size: 10px;">{{param.productUnPaidNum}}</span>
+            </div>
+            <img src="images/buy_cart.png" style="height:30px;margin: 1.9% 4% 0.9% 1.9%;margin-top:13px" ng-click="loginCart()">
+        </div>
+        <!--轮播图部分-->
+        <ion-slide-box auto-play="true" does-continue="true" slide-interval=4000 show-pager="false" style="margin-top: 1px">
+            <ion-slide ng-repeat="item in param.bannerList" ng-if="item.bannerType=='banner'">
+                <div class="box" style="height:3.28rem;width: 7.50rem">
+                    <a ng-href="{{item.forward}}" ng-click="clickCarousel(item.id)">
+                        <img ng-src="{{item.uri}}" style="height:3.28rem;width:7.50rem"/></a>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="wrap" ng-click="goOctoberTeam()" ng-if="rankingsList.length>0">
+            <div style="position: absolute;left: 0px;top: 220px;background-color: #f8f8f8;width: 100%;height:32px" >
+                <img src="images/laba.jpg" style="width: 18px;height: 17px;margin-left: 10px;margin-top: 7px">
+                <div id="wraps">
+                    <ul id="list">
+                        <li ng-repeat="item in rankingsList">
+                            恭喜<span>{{item.nickname}}</span>荣获消费排行榜第{{$index+1}}名，共计消费<span>{{item.amount_total}}</span>元
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--99专区-->
+        <div class="row" style="background:white;height:100px;margin-top:15px;">
+            <div class="col" style="text-align:center" ng-click="areaPage('zhuanqu&9.90')">
+                <img src="images/fenlei/fenlei1.png" style="width: 30px;height: 28px;margin-top:18px;margin-left:28%">
+                <span style="color:#666666;font-size:15px;top:-25px;position: relative">9.9特惠</span>
+            </div>
+            <div class="col" style="text-align:center;height: 100px;" ng-click="areaPage('zhuanqu&39.00')">
+                <img src="images/fenlei/fenlei2.png" style="width: 30px;height: 28px;margin-top:18px;margin-left:28%">
+                <span style="color:#666666;font-size:15px;top:-25px;position: relative">39.9专供</span>
+            </div>
+            <div class="col" style="text-align:center" ng-click="areaPage(3)">
+                <img src="images/fenlei/fenlei3.png" style="width: 30px;height: 28px;margin-top:18px;margin-left:28%">
+                <span style="color:#666666;font-size:15px;top:-25px;position: relative">99国货</span>
+            </div>
+            <div class="col" style="text-align:center" ng-click="areaPage(5)">
+                <img src="images/fenlei/fenlei4.png" style="width: 30px;height: 28px;margin-top:18px;margin-left:28%">
+                <span style="color:#666666;font-size:15px;top:-25px;position: relative">99韩品</span>
+            </div>
+            <div class="col" style="text-align:center" ng-click="areaPage(3)">
+                <img src="images/fenlei/fenlei5.png" style="width: 30px;height: 28px;margin-top:18px;margin-left:28%">
+                <span style="color:#666666;font-size:15px;top:-25px;position: relative">全部商品</span>
+            </div>
+        </div>
+
+        <!--新人专享-->
+        <div class="item" style="margin-top:5px;height: 165px;">
+            <!--<span class="item-note" style="margin-top:6px" ng-click="Newlyweds(1)">-->
+                <!--查看更多&nbsp;&nbsp;<i class="ion ion-ios-arrow-right"></i>-->
+            <!--</span>-->
+            <p>
+                <img src="images/fenlei/xinren.png" style="position: absolute;width:30px">
+                <span style="margin-left: 40px;
+                        color: black;
+                        font-size: 18px;
+                        margin-top: 4px;
+                        position: absolute;">新人专享</span>
+            </p>
+            <div class="row" style="margin-top:25px">
+                <div class="col">
+                    <img src="images/demo/demo1.png"
+                         style="width:115%;height:100px;margin-left:-20px">
+                </div>
+                <div class="col">
+                    <img src="images/demo/demo1.png"
+                         style="width:115%;height:100px;margin-left:-5px">
+                </div>
+            </div>
+        </div>
+
+        <!--分区-->
+        <div style="background: white;height:320px;margin-top:5px">
+            <p style="color: white;font-size:10px">1234</p>
+            <div class="row row-wrap">
+                <div class="col col-50"
+                     style="position: relative"
+                     ng-click="areaPage(6)">
+                    <div style="border:1px solid #999;border-radius:5px">
+                        <img src="images/fenlei/tjzq.png"
+                             style="height:85px;width:65px;margin-left:63%" class="full-image">
+                        <div style="position: absolute;top:15.5px;left: 16px">
+                            <p style="font-family: PingFang-SC-Medium;font-size: 16px;color: #FF6666;letter-spacing: 0.42px;">特价专区</p>
+                            <p style="font-family: PingFang-SC-Regular;font-size: 10px;color: #9B9B9B;letter-spacing: 0.38px;margin-top: 5px;">潮流尖货 限时抢购</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-50" style="position: relative"
+                     ng-click="areaPage(3)">
+                    <div style="border:1px solid #999;border-radius:5px">
+                        <img src="images/fenlei/xpcx.png" style="height:85px;width:65px;margin-left:63%" class="full-image">
+                        <div style="position: absolute;top:15.5px;left: 16px">
+                            <p style="font-family: PingFang-SC-Medium;font-size: 16px;color: #9B9B9B;letter-spacing: 0.42px;">新品尝鲜</p>
+                            <p style="font-family: PingFang-SC-Regular;font-size: 10px;color: #FF6666;letter-spacing: 0.38px;margin-top: 5px;">全场五折优惠</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--秒杀抢购部分-->
+            <div class="row">
+                <div class="col col-50" style="border-right: 1px solid #F5F5F5;position: relative" ng-click="seckillList()">
+                    <div style="border:1px solid #999;border-radius:5px;height:195px">
+                        <p style="font-family: PingFang-SC-Medium;font-size: 14px;color: #4A4A4A;letter-spacing: 0.33px;margin: 7px">
+                            <img src="images/ding.png" style="display: inline-block;width: 17px;height: 16px"><span style="margin-left: 5px">秒杀专区</span>
+                        </p>
+                        <p style="font-family: PingFang-SC-Regular;font-size: 10px;color: #9B9B9B;letter-spacing: 0.3px;margin-top: -3px;margin-left: 6px;margin-bottom: 12px">优质好货限时疯抢</p>
+                        <img src="images/fenlei/mszq.png" style="width:100%;height:170px;margin-top:-20px">
+                    </div>
+                </div>
+                <div class="col col-25" style="border-bottom: 1px solid #F5F5F5;border-right: 1px solid #F5F5F5" ng-click="distributionArea(9)">
+                    <div style="border:1px solid #999;border-radius:5px;height: 195px">
+                        <p style="font-family: PingFang-SC-Medium;font-size: 14px;color: #FF6666;line-height: 16px;margin-top: 7px;margin-left: 5px">拼团专区</p>
+                        <p style="font-family: PingFang-SC-Regular;font-size: 10px;color: #9B9B9B;margin-top: 5px;margin-left: 5px">边拼边花边赚钱</p>
+                        <img src="images/fenlei/product1.png" style="width: 64px;height: 64px;margin:12px 12px 8px 12px;margin-top: 30px">
+                    </div>
+                </div>
+                <!--拼团专区-->
+                <div class="col col-25" style="border-bottom: 1px solid #F5F5F5" ng-click="areaPage(8)">
+                    <div style="border:1px solid #999;border-radius:5px;height: 195px">
+                        <p style="font-family: PingFang-SC-Medium;font-size: 14px;color: #FF6666;line-height: 16px;margin-top: 7px;margin-left: 5px">砍价专区</p>
+                        <p style="font-family: PingFang-SC-Regular;font-size: 10px;color: #9B9B9B;margin-top: 5px;margin-left: 5px">陪你一起拼好货</p>
+                        <img src="images/fenlei/product2.png" style="width: 64px;height: 64px;margin:12px 12px 8px 12px;margin-top:40px">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--秒杀专区-->
+        <div class="item" style="margin-top:5px;height: 205px;">
+            <span class="item-note" style="margin-top:6px" ng-click="seckillList()">
+                秒杀好货&nbsp;&nbsp;<i class="ion ion-ios-arrow-right"></i>
+            </span>
+            <p>
+                <img src="images/fenlei/icon6.png" style="position: absolute;width:30px">
+                <span style="margin-left: 40px;
+                        color: black;
+                        font-size: 18px;
+                        margin-top: 4px;
+                        position: absolute;">秒杀专区</span>
+            </p>
+            <div style="margin-top:40px">
+                <img src="images/demo/demo1.png"
+                     style="width:110%;height:140px;margin-left:-5%">
+            </div>
+        </div>
+
+        <div class="item" style="margin-top:5px;height: 205px;">
+            <span class="item-note" style="margin-top:6px" ng-click="distributionArea(9)">
+                进去拼团&nbsp;&nbsp;<i class="ion ion-ios-arrow-right"></i>
+            </span>
+            <p>
+                <img src="images/fenlei/icon8.png" style="position: absolute;width:30px">
+                <span style="margin-left: 40px;
+                        color: black;
+                        font-size: 18px;
+                        margin-top: 4px;
+                        position: absolute;">拼团专区</span>
+            </p>
+            <div style="margin-top:40px">
+                <img src="images/demo/demo1.png"
+                     style="width:110%;height:140px;margin-left:-5%">
+            </div>
+        </div>
+
+        <div class="item" style="margin-top:5px;height: 205px;">
+            <span class="item-note" style="margin-top:6px" ng-click="areaPage(8)">
+                进去砍价&nbsp;&nbsp;<i class="ion ion-ios-arrow-right"></i>
+            </span>
+            <p>
+                <img src="images/fenlei/icon10.png" style="position: absolute;width:30px">
+                <span style="margin-left: 40px;
+                        color: black;
+                        font-size: 18px;
+                        margin-top: 4px;
+                        position: absolute;">砍价专区</span>
+            </p>
+            <div style="margin-top:40px">
+                <img src="images/demo/demo1.png"
+                     style="width:110%;height:140px;margin-left:-5%">
+            </div>
+        </div>
+
+        <div class="item" style="margin-top:5px;height: 205px;">
+            <span class="item-note" style="margin-top:6px" ng-click="areaPage(6)">
+                进去看看&nbsp;&nbsp;<i class="ion ion-ios-arrow-right"></i>
+            </span>
+            <p>
+                <img src="images/fenlei/icon12.png" style="position: absolute;width:30px">
+                <span style="margin-left: 40px;
+                        color: black;
+                        font-size: 18px;
+                        margin-top: 4px;
+                        position: absolute;">特价专区</span>
+            </p>
+            <div style="margin-top:40px">
+                <img src="images/demo/demo1.png"
+                     style="width:110%;height:140px;margin-left:-5%">
+            </div>
+        </div>
+
+        <!--<div class="item" style="margin-top:5px;height: 205px;">-->
+            <!--<span class="item-note" style="margin-top:6px" ng-click="Newlyweds(1)">-->
+                <!--进去看看&nbsp;&nbsp;<i class="ion ion-ios-arrow-right"></i>-->
+            <!--</span>-->
+            <!--<p>-->
+                <!--<img src="images/fenlei/icon14.png" style="position: absolute;width:30px">-->
+                <!--<span style="margin-left: 40px;-->
+                        <!--color: black;-->
+                        <!--font-size: 18px;-->
+                        <!--margin-top: 4px;-->
+                        <!--position: absolute;">好货推荐</span>-->
+            <!--</p>-->
+            <!--<div style="margin-top:40px">-->
+                <!--<img src="images/demo/demo1.png"-->
+                     <!--style="width:110%;height:140px;margin-left:-5%">-->
+            <!--</div>-->
+        <!--</div>-->
+        <br>
+        <!--我是有底线的-->
+        <div style="margin-bottom: 20px">
+            <img src="images/line.png" style="width: 100%">
+        </div>
+    </ion-content>
+    <!--ionic 底部切换在安卓手机出现兼容问题 所以改变成div形式-->
+    <div style="width: 100%;background: white ;position: absolute;left: 0px;bottom: 0px;right: 0px;height: 48px;">
+        <ul style="display: flex;flex-wrap: wrap;justify-content: space-between;font-size: 14px">
+            <li style="text-align: center;width: 25%;height: 48px" class="footColor" ng-click="checkBg(0)" ui-sref="shopHome">
+                <i class=" icon ion-ios-home-outline"  style="font-size: 24px;display: inline-block;margin-top: 5px" class="footColor" ng-class="{'footActive':param.checkType==0}"></i>
+                <p style="margin-top: 1px;font-size: 12px" class="footColor" ng-class="{'footActive':param.checkType==0}">首页</p>
+            </li>
+            <li style="text-align: center;width: 25%;height: 48px"  ng-click="checkBg(1)" class="footColor" ui-sref="classification">
+                <i class=" icon ion-ios-keypad-outline" style="font-size: 24px;display: inline-block;margin-top: 5px" ng-class="{'footActive':param.checkType==1}"></i>
+                <p style="margin-top: 1px;font-size: 12px" ng-class="{'footActive':param.checkType==1}">分类</p>
+            </li>
+            <li style="text-align: center;width: 25%;height: 48px"  ng-class="{'footActive':param.checkType==2}" ng-click="checkBg(2)" class="footColor" ui-sref="shareHome">
+                <i class="icon ion-ios-redo-outline" style="font-size: 24px;display: inline-block;margin-top: 5px" ng-class="{'footActive':param.checkType==2}"></i>
+                <p style="margin-top: 1px;font-size: 12px" ng-class="{'footActive':param.checkType==2}">分享</p>
+            </li>
+            <li style="text-align: center;width: 25%;height: 48px"  ng-class="{'footActive':param.checkType==3}" ng-click="checkBg(3)" class="footColor" ui-sref="orderManagement({type:'all'})">
+                <i class=" icon ion-ios-list-outline" style="font-size: 24px;display: inline-block;margin-top: 5px" ng-class="{'footActive':param.checkType==3}"></i>
+                <p style="margin-top: 1px;font-size: 12px" ng-class="{'footActive':param.checkType==3}">我的订单</p>
+            </li>
+        </ul>
+    </div>
+</ion-view>
+
+
+
+
+<ion-view style="background: #F5F5F5">
+    <style>
+        video::-webkit-media-controls-fullscreen-button{
+            display: none;
+        }
+        video::-internal-media-controls-button-panel{
+            opacity: 0.5;
+        }
+        @-webkit-keyframes middle {
+            0% {
+                top: 100px;
+            }
+            100% {
+                top: -1600px;
+            }
+        }
+
+        @-webkit-keyframes move {
+            0% {
+                left: 300px;
+            }
+            100% {
+                left: -1600px;
+            }
+        }
+
+        #wraps {
+            width: 1600px;
+            height: 30px;
+            position: absolute;
+            margin: 100px 0;
+            top: -100px;
+            overflow: hidden;
+            left: 50px
+        }
+
+        #list {
+            position: absolute;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            -webkit-animation: 30s move infinite linear;
+            width: 160%;
+            height: 100%;
+        }
+
+        #list li {
+            list-style: none;
+            width: 250px;
+            height: 20px;
+            margin-top: 7px;
+            color: #fff;
+            font: 14px Arial;
+            text-align: center;
+            float: left;
+            white-space: nowrap;
+        }
+
+        #list li:first-child {
+            width: 350px;
+        }
+
+        #list li span {
+            color: #fff;
+        }
+
+        #wraps:hover #list {
+            -webkit-animation-play-state: paused;
+        }
+
+        @keyframes moveup {
+            0% {
+                transform: translateY(20);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        /*.box {
+            animation: moveup 15s linear infinite;
+        }*/
+        .page {
+            overflow: hidden;
+            height: 230px
+        }
+
+        .box {
+            margin: 0;
+        }
+
+        .box li {
+            line-height: 30px;
+        }
+
+        .redPacket_box {
+            background-image: url('images/shopFrame.png');
+            background-size: 100% 100%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+            z-index: 10;
+        }
+
+        /* .redPacket {
+             position: relative;
+             width: 65%;
+             margin: auto;
+             margin-top: 40%;
+         }
+
+         .redPacket img {
+             display: block;
+             width: 100%;
+             height: 100%;
+         }
+
+         .redPacket .daynum {
+             position: absolute;
+             bottom: 44%;
+             left: 46%;
+             color: #fff;
+             font-size: 12px;
+         }
+
+         .redPacket .close {
+             width: 40px;
+             height: 40px;
+             border-radius: 50%;
+             !*background-color: #ffffff;*!
+             position: absolute;
+             top: 64px;
+             right: 32px;
+         }
+ */
+        .redPacket_box .close1 {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+
+        /*底部切换*/
+        .footColor {
+            color: #858585;
+        }
+
+        .footActive > .footColor {
+            color: #fb5eb4;
+
+        }
+
+        .footActive > li.footColor:before {
+            background-color: #fb5eb4;
+        }
+
+        /*推荐特惠*/
+        li {
+            line-height: 20px;
+            text-align: center;
+        }
+
+        ul > li > span {
+            font-size: 15px;
+            color: #646464;
+        }
+
+        .slider-pager {
+            position: absolute;
+            bottom: 14%;
+            z-index: 1;
+            width: 165%;
+            height: 25%;
+            text-align: center;
+        }
+
+        .slider-pager .slider-pager-page {
+            display: inline-block;;
+            margin: 0 3px;
+            width: 2%;
+            color: #fd7bc1;
+            opacity: 0.3;
+            font-size: 13px;
+        }
+
+        .shopLi li {
+            line-height: 0px; /*width:20%;*/
+            position: relative;
+            text-align: center
+        }
+
+        .shopLi li img {
+            width: 55px;
+            height: 55px;
+        }
+    </style>
+    <ion-content overflow-scroll="true" style="bottom: 48px;background-color: #fff;">
+        <!--顶部搜索-->
+        <div style="background: #ffffff;width: 100%;height: 56px;line-height: 56px;display: flex;justify-content: space-between">
+            <img src="images/NewGroup.png" style="height: 38px;margin: 1.9% 2.1% 0.9% 2.7%" ng-click="area()">
+            <div style="height: 36px;margin: auto;position: relative;width:68%">
+                <i class="icon ion-ios-search placeholder-icon"
+                   style="position: absolute;left: 20px;top: -10px;font-size: 20px"></i>
+                <input type="text"
+                       style="width:100%;height:40px;background: #f5f5f5;border: 0 solid #CCCCCC;border-radius: 58px;padding-left:50px;"
+                       placeholder="请在这里搜索你想要的产品" ng-click="search()">
+            </div>
+            <div style="min-width:0.3rem;min-height:0.3rem;background-color:#F00;
+                              border-radius:25px;position:absolute;right: 10px;
+                              margin-top:0.1rem">
+                <span style="height:0.3rem; line-height:0.3rem; display:block; color:#FFF; text-align:center;font-size: 10px;">{{param.productUnPaidNum}}</span>
+            </div>
+            <img src="images/NewGroup2.png" style="height: 38px;margin: 1.9% 1% 0.9% 1.9%" ng-click="loginCart()">
+        </div>
+        <!--轮播图部分-->
+        <ion-slide-box id='slider' auto-play="true" does-continue="true" slide-interval=4000 show-pager="true"
+                       style="margin-top: 1px;width: 100%;margin: 0 auto; ">
+            <ion-slide ng-repeat="item in param.bannerList" ng-if="item.bannerType=='banner'">
+                <div class="box" style="height:3.28rem;width: 7.50rem">
+                    <a ng-href="{{item.forward}}" ng-click="clickCarousel(item.id)"> <img ng-src="{{item.uri}}"
+                                                                                          style="height:3.28rem;width:7.50rem"/></a>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="wrap" ng-if="rankingsList.length>0" style="background: #fff">
+            <div style="position: absolute;
+                        left: 0%;
+                        background-color: #f8f8f8;
+                        width: 100%;
+                        height: 32px;
+                        background: #ff748f;">
+                <img src="images/laba.png" style="width: 25px;height: 25px;margin-left: 10px;margin-top: 2px">
+                <div id="wraps">
+                    <ul id="list">
+                        <li ng-repeat="item in rankingsList">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--防晒霜视频-->
+        <div style="width: 100%;height: 180px;background-image: url('images/videoBg.png');background-size: 100% 100%;position: relative;top: 30px">
+            <!-- <div style="width:78%;height: 145px;background-image: url('images/videoBorder.png');background-size: 100% 100%;position: absolute;left: 0;top: 0px;margin:auto;right: 0px;bottom: 0px" >-->
+            <div ng-if="isPlayVideo" style="width: 94%;height: 125px;font-size: 14px;background: #000;position: absolute;left: 0;right: 0;top: 0;bottom: 0;margin: auto;border-radius: 10px;">
+                <p style="text-align: center;margin-top: 25px;">正在使用非WIF网络，播放将产生流量费用</p>
+                <p style="text-align: center;margin-top: 20px">视频时长54s | 流量约 600KB</p>
+                <button ng-click="continuePlay()" style="margin: 0 auto;display: block;border: 1px solid #ffffff;border-radius: 3px;margin-top: 21px;width: 30%;text-align: center;color: #fff;" id="play_btn">继续播放
+                </button>
+            </div>
+            <div  ng-click="videoPlayTap()">
+                <video ng-if="!isPlayVideo" id="media"  poster="https://mx-beauty.oss-cn-beijing.aliyuncs.com/34f18114d98303f684b7d1c95874115.png" src="https://mx-beauty.oss-cn-beijing.aliyuncs.com/%E5%90%88%E9%9B%86.mp4" x5-playsinline="" playsinline="" webkit-playsinline=""  style="width: 75%;height:133px;position: absolute;right: 0px;left: 0px;bottom: 0px;top: 0px;margin: auto;object-fit:fill;"></video>
+            </div>
+            <!--  </div>-->
+        </div>
+        <!--特惠推荐-->
+        <div style="margin-top: 15px;">
+            <ul style="display: flex;justify-content:space-between;padding: 8% 3%;border-bottom: 1px solid #e8e8e8;"
+                class="shopLi">
+                <li ng-click="areaPage('zhuanqu&9.90')"><img src="images/common/img9.9.png" alt=""
+                                                             style="width:30px;height:38px;margin: 16px auto 0;">
+                    <img src="images/common/imgnew.png"
+                         style="position: absolute;right:0px;top:-6px;width: 29px;height:22px;"/>
+                    <span>9.9特惠</span></li>
+                <li ng-click="areaPage('zhuanqu&39.90')"><img src="images/common/img39.9.png" alt=""
+                                                              style="width:30px;height:41px;margin:13px auto 0;"><span>39.9专供</span>
+                </li>
+                <li ng-click='areaPage(11)'><img src="images/common/img99C.png" alt=""
+                                                 style="width:36px;height:36px;margin:18px auto 0;"><span>99国货</span>
+                </li>
+                <li ng-click='areaPage(5)'><img src="images/common/img199.png" alt=""
+                                                style="width:36px;height:43px;margin:11px auto 0;"> <span>199韩品</span>
+                </li>
+                <li ng-click='areaPage("")'><img src="images/common/all.png" alt=""
+                                                 style="width:40px;height:38px;margin:16px auto 0;">
+                    <img src="images/common/imgnew.png"
+                         style="position: absolute;right:0px;top:-6px;width: 29px;height:22px;"/>
+                    <span>全部商品</span></li>
+            </ul>
+
+        </div>
+
+        <!--新人专享头标-->
+        <div class="row row-wrap" style="padding: 0;padding-left: 2%;">
+            <div class="col col-70" style="padding: 0">
+                <img src="images/zhuanxiang.png" alt=""
+                     style="vertical-align: middle;display: inline-block;width: 10%;">
+                <span style="font-size: 20px;
+                                color: #323232;
+                                margin-top: 22px;
+                                position: absolute;
+                                margin-left: 10px">新人专享</span>
+            </div>
+        </div>
+
+        <!--新人专享链接图片-->
+        <div class="row row-wrap" style="width: 96%;margin: 2% auto;padding: 1.5% 0; height: 110px;">
+            <div class="col col-49.5" ng-click="goNewlyweds('AAA111')"
+                 style="margin-right: 2px;height: 110px;text-align: center;border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;padding: 0;">
+                <img ng-src="{{newUserImgUrl1}}" err-src="images/zhuanxiang.jpg" alt=""
+                     style="width:100%;height: 91px;">
+            </div>
+            <div class="col col-49.5" ng-click="goNewlyweds('AAA222')"
+                 style="margin-left: 2px;height: 110px;text-align: center;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 0;">
+                <img ng-src="{{newUserImgUrl2}}" err-src="images/zhuanxiang2.jpg" alt=""
+                     style="width:100%;height: 91px;">
+            </div>
+        </div>
+        <div style="width: 100%;height: 1px;background-color: #e8e8e8;"></div>
+        <!--拼团专区-->
+        <div style="padding: 0;margin: 10% 0;width: 96%;margin: auto;height:3.5rem;margin-top: 6%;background: #ffffff;margin-bottom: 10px; padding-bottom: 2%;"
+             class="row">
+            <div class="col col-49.5" ng-click="distributionArea(8)"
+                 style="height:3.5rem;text-align: center;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 0;position: relative">
+                <img ng-src="{{collageImgUrl}}" err-src="images/pintuan_section.jpg" alt=""
+                     style="width:100%;height: 3.5rem;">
+                <!--<img src="http://t00img.yangkeduo.com/goods/images/2018-11-27/b029799e2af2466305285a445feb13a7.gif" style="position: absolute;top: 0px;left:60%; width: 23px;height: 23px;">-->
+            </div>
+            <!--分销 专区 -->
+            <div class="col col-49.5" style="height: 3.5rem;margin-left: 3px;padding: 0;">
+                <div class="row row-wrap" style="padding: 0px">
+                    <!--秒杀专区-->
+                    <div class="col col-50" ng-click='seckillList()'
+                         style="height:3.5rem;text-align: center;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 0;">
+                        <img ng-src="{{seckillImgUrl}}" err-src="images/miaosha_section.png" alt=""
+                             style="width:100%;height: 3.5rem;">
+                    </div>
+
+
+                    <div class="col col-50" ng-click="cutPrice(9)"
+                         style="height:3.5rem;text-align: center;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 0;">
+                        <img ng-src="{{cutImgUrl}}" err-src="images/kanjia_section.jpg" alt=""
+                             style="width:100%;height: 3.5rem;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--特价专区-->
+        <div class="row row-wrap" style="width: 96%;margin:auto;padding: 4% 0;height: 91px;margin-top: 0.8%;">
+            <div class="col col-49.5" ng-click="areaPage(6)"
+                 style="margin-right: 3px;text-align: center;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 0;">
+                <img ng-src="{{specialImgUrl}}" err-src="images/tejia_section.jpg" alt=""
+                     style="width:100%;height: 91px;">
+
+            </div>
+            <div ng-click='areaPage(7)' class="col col-49.5"
+                 style="margin-left: 3px;height: 91px;text-align: center;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 0;">
+                <img ng-src="{{newProductImgUrl}}" err-src="images/xinpin_section.jpg" alt=""
+                     style="width:100%;height: 91px;">
+
+            </div>
+        </div>
+
+        <!--498专区-->
+        <div style="padding:30px 0;">
+            <div style="width:100%;height:150px;margin:0px auto;background: url('images/common/sticksBg.png');background-size: 100% 100%;position: absolute;"></div>
+            <div style="background: url('images/NewYearsDay/NewYearsDayBg.png');width:100%;background-size: 100% 100%;padding:1px 0 15px 0;margin-top:140px;">
+                <div style="width: 96%;margin: 10px auto 0;height:157px;position: relative;"
+                     ng-repeat="item in product498List" ng-click="enterDetails(item.productId)">
+                    <img ng-src="{{item.firstUrl}}" err-src="images/tejia_section.jpg" alt=""
+                         style="width:100%;height: 157px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;">
+                </div>
+            </div>
+        </div>
+
+
+        <!--我是有底线的-->
+        <div style="margin-bottom: 20px;margin-top: 5%;">
+            <img src="images/line.png" style="width: 100%">
+        </div>
+
+    </ion-content>
+    <!--ionic 底部切换在安卓手机出现兼容问题 所以改变成div形式-->
+
+    <div style="width: 100%;background: #ffffff ;position: absolute;left: 0px;bottom: 0px;right: 0px;height: 55px;border-top:1px solid #efefef;">
+        <ul style="display: flex;flex-wrap: wrap;justify-content: space-between;font-size: 14px">
+            <li style="text-align: center;width: 20%;height: 48px" ng-class="{'footActive':param.checkType==0}"
+                ng-click="checkBg(0)" ui-sref="shopHome">
+                <i class=" icon ion-ios-home footColor" style="font-size: 24px;display: inline-block;margin-top: 5px;"
+                   class="footColor"></i>
+                <p class="footColor" style="margin-top: -2px;font-size: 12px">首页</p>
+            </li>
+            <li style="text-align: center;width: 20%;height: 48px" ng-class="{'footActive':param.checkType==1}"
+                ng-click="checkBg(1)" class="footColor" ui-sref="classification">
+                <i class=" icon ion-ios-keypad footColor"
+                   style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p class="footColor" style="margin-top: -2px;font-size: 12px">分类</p>
+            </li>
+            <li style="text-align: center;width: 20%;height: 48px" ng-class="{'footActive':param.checkType==2}"
+                ng-click="checkBg(2)" class="footColor" ui-sref="shareHome">
+                <i class="icon ion-ios-redo footColor"
+                   style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p class="footColor" style="margin-top: -2px;font-size: 12px">分享</p>
+            </li>
+            <li style="text-align: center;width: 20%;height: 48px;position: relative"
+                ng-class="{'footActive':param.checkType==4}" ng-click="checkBg(4)" class="footColor" ui-sref="beans">
+                <img src="images/shopNew.gif" alt=""
+                     style="position: absolute;top: 0px;right: 7px; width: 20px;height: 20px;">
+                <i class="icon ion-android-checkbox-outline footColor"
+                   style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p class="footColor" style="margin-top: -2px;font-size: 12px">签到有礼</p>
+            </li>
+            <li style="text-align: center;width: 20%;height: 48px" ng-class="{'footActive':param.checkType==3}"
+                ng-click="checkBg(3)" class="footColor" ui-sref="orderManagement({type:'all'})">
+                <i class=" icon ion-ios-list footColor"
+                   style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p class="footColor" style="margin-top: -2px;font-size: 12px">我的订单</p>
+            </li>
+        </ul>
+    </div>
+
+    <!--进首页弹出页面-->
+    <!-- <div  ng-if="param.redPackerBox" >
+         <div class="redPacket_box">
+             <div class="redPacket">
+                 <div ng-click="goActivity(item.forward)">
+                     <img ng-src="{{item.uri}}" >
+                 </div>
+
+             </div>
+             <img src="images/cancel_03.png" ng-click="redPackerClose();event.preventDefault();event.cancelBubble();event.stopPropagation ()"  class="close1">
+         </div>
+     </div>-->
+</ion-view>

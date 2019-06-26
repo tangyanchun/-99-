@@ -1,0 +1,10 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <div class="list">
+            <p class="item" ><span style="color:#333333;font-size:0.3rem;float: left;margin-left: 0.2rem;margin-top: 0.1rem">头像</span> <span style="float: right;margin-right: 0.2rem"><img ng-src="{{param.userInfo.photo}}" style="width: 0.68rem;height: 0.68rem"></span></p>
+            <p class="item" ><span style="color:#333333;font-size:0.3rem;float: left;margin-left: 0.2rem">手机号</span> <span style="float: right;margin-right: 0.2rem;color: #333333;font-size: 0.3rem">{{ param.userInfo.mobile}}</span></p>
+            <!--<p class="item"><span style="font-size:0.3rem;float: left;color:#333333;margin-left: 0.2rem;">开发票</span><i style="float:right;margin-right:0.2rem;font-size: 0.35rem;margin-top: 0.1rem" class="ion ion-ios-arrow-right"></i></p>-->
+            <p class="item" style="text-align: center"><span style="font-size: 0.3rem;color: #ff4a59;" ng-click="exit()">退出当前账号</span></p>
+        </div>
+    </ion-content>
+</ion-view>

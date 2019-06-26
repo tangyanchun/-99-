@@ -1,0 +1,21 @@
+<ion-view >
+    <ion-content  >
+
+        <ion-list>
+            <ion-item class="item-input">
+                <span class="item-input-wrapper" style="margin-right:16px">
+                        <i class="icon ion-ios-search placeholder-icon" ></i>
+                        <input id="search" type="search" placeholder="请输入交易流水号" ng-model="param.tradingNum">
+                        <i class="icon ion-close-circled placeholder-icon" style="vertical-align: middle;"
+                           on-tap="clearSearch()" ng-if="param.tradingNum!=''"></i>
+                 </span>
+                <span style="color:#ff6666;margin-right:10px;" ng-click="search()">搜索</span>
+            </ion-item>
+            <ion-item class="" ng-repeat="item in itemArr2"></ion-item>
+        </ion-list>
+
+
+
+
+    </ion-content>
+</ion-view>

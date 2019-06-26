@@ -1,0 +1,45 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+
+        <div class="list"
+             ng-repeat="item in param.freeProductDTOList" ng-click="courseDetails(item.productId)" style="background: white;margin-top:-8x;">
+            <a class="item item-thumbnail-left" style="border-color:white;padding-left:42%;">
+                <img ng-src="{{item.firstUrl}}" style="float:left;min-width:121px;min-height:121px;margin:auto;border-radius: 4px;">
+                <p style="font-size:16px;margin-left:2%;font-family: PingFang-SC;margin-top:10px;color:#4a4a4a;">{{item.productName}}</p>
+                <p style="font-size:12px;margin-left:2%;font-family:PingFang-SC-Regular;margin-top:6px;color:#818181;">{{item.teacherName}} 美享商学院讲师</p>
+                <p></p>
+                <p style="font-size:14px;margin-left:2%;font-family:PingFang-SC;margin-top:6px;color:#CCCCCC;">{{item.description}}</p>
+                <br><br>
+                <p style="margin-left:2%;font-size:16px;font-family:PingFang-SC-Bold;;color:#EB5E0F;">{{item.secondTypeName}}<span style="font-size: 0.24rem;color: #666666"></span></p>
+            </a>
+        </div>
+
+        <div class="list"
+             ng-repeat="item in param.memberProductDTOList" ng-click="courseDetails(item.productId)" style="background: white;margin-top:-8px;">
+            <a class="item item-thumbnail-left" style="border-color: white;padding-left:42%;">
+                <img ng-src="{{item.firstUrl}}" style="min-width:121px;min-height:121px;margin:auto;border-radius: 4px;">
+                <p style="font-size:16px;margin-left:2%;font-weight:bold;font-family:PingFang-SC-Bold;margin-top:10px;color:#4a4a4a;">{{item.productName}}</p>
+
+                <p style="font-size:12px;margin-left:2%;font-family:PingFang-SC-Regular;margin-top:6px;color:#4A4A4A;">{{item.teacherName}} 美享商学院讲师</p>
+                <p></p>
+                <p style="font-size:14px;margin-left:2%;font-family:PingFang-SC;margin-top:6px;color:#CCCCCC;">{{item.description}}</p>
+                <br><br>
+                <p style="margin-left:2%;font-size:16px;font-family:PingFang-SC-Bold;color:#EB5E0F;">{{item.secondTypeName}}<span style="font-size: 0.24rem;color: #666666"></span></p>
+            </a>
+        </div>
+
+        <div class="list"
+             ng-repeat="item in param.chargeProductDTOList" ng-click="courseDetails(item.productId)" style="background: white;margin-top:-8px;">
+            <a class="item item-thumbnail-left" style="border-color:white;padding-left:42%;">
+                <img ng-src="{{item.firstUrl}}" style="min-width:121px;min-height:121px;margin:auto;border-radius:4px;">
+                <p style="font-size:16px;font-family:PingFang-SC;margin-left:2%;margin-top:10px;color:#4a4a4a;">{{item.productName}}</p>
+                <p style="font-size:12px;font-family: PingFang-SC-Regular;margin-left:2%;margin-top:6px;color:#4A4A4A;">{{item.teacherName}} 美享商学院讲师</p>
+                <p></p>
+                <p style="font-size:14px;font-family:PingFang-SC;margin-left:2%;margin-top:6px;color:#CCCCCC;">{{item.description}}</p>
+                <br><br>
+                <p style="margin-left:2%;font-size:16px;font-family:PingFang-SC-Bold;color:#EB5E0F;">￥{{item.price}} <span style="font-family: PingFang-SC-Bold;font-size:0.24rem;color: #666666"></span></p>
+            </a>
+        </div>
+
+    </ion-content>
+</ion-view>

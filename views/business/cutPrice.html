@@ -1,0 +1,47 @@
+<ion-view style="background: #f5f5f5">
+    <style>
+        .footColor{color: #4A4A4A;}
+        .footActive{
+            background:#FC4B4B;color:#ffffff;
+        }
+    </style>
+    <ion-content style="margin-bottom: 48px">
+        <div ng-show="!param.picFlag">
+        <img src="images/cut.png" alt="" style="width: 100%;height: 135px">
+        <!--砍价类表-->
+        <div class="list" ng-repeat="item in param.productList" style="background: #FFFFFF;margin-top: 10px;margin-bottom: 10px"  ng-click="enterDetails(item.id,item.productId)">
+            <ion-item class="row" style="border-color:#FFFFFF!important;border-width:0px!important;border-style:none!important;">
+                <div class="col col-40">
+                    <img ng-src="{{item.firstUrl}}" style="width: 100%;height: 100%">
+                </div>
+                <div class="col col-60" style="position: relative">
+                    <p style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000;letter-spacing: 0;line-height: 16px;margin-top: 18px">{{item.name}}</p>
+                    <p style="margin-top: 15px;"><span style="color: #434a54;font-size: 12px"><span style="color:#ff6666">{{item.productSalesVolume}}人</span>已砍价购买</span></p>
+
+
+                    <p style="margin-top:45px;font-family: PingFangSC-Regular;font-size: 16px;color: #ff6666;line-height: 12px;">￥{{item.price}}</p>
+                    <p style="margin-top: 16px"> <span style="font-size: 12px;color: #434a54;" get-data="getData()"  start-time="item.overTime"  timer-btn></span><span style="background: #FF6666;border: 1px solid #FF6666;width: 82.5px;height: 32px;font-family: PingFangSC-Regular;font-size: 15px;color: #FFFFFF;letter-spacing: 0;line-height: 27px;text-align: center;position:absolute;bottom: 5px;right:2px;display: inline-block">点击砍价</span></p>
+                </div>
+            </ion-item>
+         </div>
+        </div>
+        <!--空页面-->
+        <div ng-show="param.picFlag">
+            <img src="images/coming.png" style="width: 142px;height: 127px;margin:auto;margin-top: 175px">
+            <p style="margin-top: 73px;font-family: PingFang-SC-Medium;font-size: 14px;color: #4A4A4A;letter-spacing: 0.33px;text-align: center">亲，砍价商品已售罄，下次早点来啊！</p>
+        </div>
+    </ion-content>
+    <!--底部按钮-->
+    <div style="width: 100%;background: #FFFFFF ;position: absolute;left: 0px;bottom: 0px;right: 0px;height: 48px;">
+        <ul style="display: flex;flex-wrap: wrap;justify-content: space-between;font-size: 14px">
+            <li style="width: 50%;text-align: center;height: 48px;line-height: 48px" class="footColor" ng-class="{'footActive':param.checkType==0}" ng-click="checkBg(0)">
+                <img src="images/bargain-white.png" style="width: 22px;height: 25px;display: inline-block;vertical-align:middle;margin-right:10px;">
+                砍价商品
+            </li>
+            <li style="width: 50%;text-align: center;height: 48px;line-height: 48px"  class="footColor"ng-class="{'footActive':param.checkType==1}" ng-click="checkBg(1)" ui-sref="myCut()">
+                <img src="images/mine.png" style="width:14px;height: 24px;display: inline-block;vertical-align:middle;margin-right:10px;">
+                我的砍价
+            </li>
+        </ul>
+    </div>
+</ion-view>

@@ -1,0 +1,13 @@
+<ion-view  style="background: #f2f5f9">
+    <ion-content>
+       <div class="list">
+           <p class="item" ng-repeat="item in rankingsList">
+               <span style="width:100%;
+                            word-break: normal;
+                            display: block;
+                            white-space: pre-wrap;
+                            overflow: hidden">第{{$index+1}}名，{{item.nickname}}，共消费{{item.amount_total}}元</span>
+           </p>
+       </div>
+    </ion-content>
+</ion-view>

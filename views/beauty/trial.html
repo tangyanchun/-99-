@@ -1,0 +1,25 @@
+<ion-view style="background-image: url('images/trail.png');background-size: 100% 100%;">
+    <style>
+        .inputs{width:58.7%;height: 18px;background: #FFFFFF;
+            border-radius: 36px;text-align: center;margin: auto}
+    </style>
+    <ion-content scroll="false" >
+     <div style="margin: 130px auto;text-align: center" >
+         <p style="font-family: PingFang-SC-Bold;font-size: 48px;color: #FFFFFF;letter-spacing: 0.67px;">唯美帮</p>
+         <p style="font-family: PingFang-SC-Medium;font-size: 15px;color: #FFFFFF;letter-spacing: -0.14px;margin-top: 10px">—申请试用—</p>
+      </div>
+        <!--input-->
+        <div style="margin-top: -80px">
+            <input type="text" placeholder="名字" class="inputs" ng-model="shopSpreadDTO.name" >
+            <input type="text" placeholder="电话" class="inputs" style="margin-top: 6px" ng-model="shopSpreadDTO.mobile">
+            <input type="text" placeholder="已加盟品牌" class="inputs" style="margin-top: 6px" ng-model="shopSpreadDTO.brand">
+            <input type="text" placeholder="所在城市/留言" class="inputs" style="margin-top: 6px" ng-model="shopSpreadDTO.detail">
+        </div>
+        <p style="ont-family: PingFang-SC-Bold;font-size: 18px;color: #FFFFFF;letter-spacing: -0.17px;position: absolute;bottom: 20%;left: 40.5%" ng-click="immediatelyTrial()">立即试用</p>
+        <div style="position: absolute;bottom: 3%;left: 23%">
+            <p style="font-family: PingFang-SC-Medium;font-size: 12px;color: #FFFFFF;letter-spacing: -0.12px;line-height: 14px;">总部：北京朝阳区金长安A座1107</p>
+            <p style="font-family: PingFang-SC-Regular;font-size: 12px;color: #FFFFFF;letter-spacing: -0.12px;line-height: 14px;text-indent: 37px">xuran@weimeibang.com</p>
+        </div>
+
+    </ion-content>
+</ion-view>

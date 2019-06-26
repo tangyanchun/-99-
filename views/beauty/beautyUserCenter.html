@@ -1,0 +1,79 @@
+<ion-view style="background:#f8f8f8">
+    <ion-content>
+        <div class="item">
+           <!-- <p class="item-note" style="color: #FF6666;font-size: 14px" ui-sref="beautyShopList">切换店铺</p>-->
+            <center>
+                <img style="border-radius:70px;margin-top:20px;width: 81px;height: 81px;"
+                        ng-src="{{shopAppointInfo.shopUserInfo.sysShopPhoto}}">
+                <p style="margin-top:15px;font-size: 12px;color: #333333">
+                    <i class="icon ion-iphone" style="width: 6px;;height: 10px"></i>&nbsp;{{shopAppointInfo.shopUserInfo.phone}}
+                    &nbsp;|&nbsp;
+                    <i class="icon ion-home" style="width: 10px;height:10px"></i>&nbsp;{{param.currentShopInfo.sysShopName}}
+                </p>
+                <br>
+                <p ng-if="shopAppointInfo.shopUserInfo.bindingDesc!=''">{{shopAppointInfo.shopUserInfo.bindingDesc}}</p>
+            </center>
+        </div>
+        <ion-item>
+            <div ng-click="bindBeautyShop()">
+                <img style="width: 15px; height:15px;position: absolute;margin-left:15px;"
+                     ng-src="https://mxavi.oss-cn-beijing.aliyuncs.com/jmcpavi/%E4%BA%8C%E7%BB%B4%E7%A0%81%403x.png">
+                <i class="ion ion-ios-arrow-forward item-note" style="margin-top:5px"></i>
+                <div style="margin-left:43px;margin-top: 5px">
+                    <h style="font-size: 15px;color: #333333">扫码绑定美容院</h>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div ui-sref="projectCardList" style="font-size: 15px;color: #333333">
+                <img style="width: 16px;height:14px; position: absolute;margin-left: 15px"
+                     ng-src="https://mxavi.oss-cn-beijing.aliyuncs.com/jmcpavi/%E7%96%97%E7%A8%8B%E5%8D%A1%403x.png">
+                <i class="ion ion-ios-arrow-forward item-note" style="margin-top:5px"></i>
+                <div style="margin-left:43px;margin-top: 5px">
+                    <h style="font-size: 15px;color: #333333">疗程卡</h>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div ui-sref="expenseCardRecord" style="font-size: 15px;color: #333333">
+                <img style="width: 16px;height:16px; position: absolute;margin-left: 15px"
+                     ng-src="https://mxavi.oss-cn-beijing.aliyuncs.com/jmcpavi/%E5%88%92%E5%8D%A1%E8%AE%B0%E5%BD%95%403x.png">
+                <i class="ion ion-ios-arrow-forward item-note" style="margin-top:5px"></i>
+                <div style="margin-left:43px;margin-top: 5px">
+                    <h style="font-size: 15px;color: #333333">划卡记录</h>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div ui-sref="beautyUserAppoint" style="font-size: 15px;color: #333333;">
+                <img style="width: 15px;height:15px; position: absolute;margin-left: 15px"
+                     ng-src="https://mxavi.oss-cn-beijing.aliyuncs.com/jmcpavi/%E6%93%8D%E4%BD%9C_%E9%A2%84%E7%BA%A6%403x.png">
+                <i class="ion ion-ios-arrow-forward item-note" style="margin-top:5px"></i>
+                <div style="margin-left:43px;margin-top: 5px">
+                    <h style="font-size: 15px;color: #333333">我的预约</h>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item style="margin-top: 10px">
+            <div style="font-size: 15px;color: #333333;" ng-click="userLoginOut()">
+                <div style="margin-top: 5px;text-align: center">
+                    <h style="font-size: 15px;color: #333333">退出登录</h>
+                </div>
+            </div>
+        </ion-item>
+    </ion-content>
+    <div class="tabs" style="background:white;color:#333333">
+        <a class="tab-item" ui-sref="beautyAppoint">
+            <p style="font-size:25px;margin-top:-12px"><i class="ion ion-ios-paper-outline"></i></p>
+            <p style="margin-top:-30px;font-size:10px">预约</p>
+        </a>
+       <!-- <a class="tab-item">
+            <p style="font-size:25px;margin-top:-12px"><i class="ion ion-ios-rose-outline"></i></p>
+            <p style="margin-top:-30px;font-size:10px">评价</p>
+        </a>-->
+        <a class="tab-item" style="color:#FF6666;">
+            <p style="font-size: 25px;margin-top:-10px"><i class="ion ion-ios-person-outline"></i></p>
+            <p style="margin-top:-30px;font-size:10px">我的</p>
+        </a>
+    </div>
+</ion-view>

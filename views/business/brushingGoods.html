@@ -1,0 +1,14 @@
+<ionic-view style="background: #f5f5f5">
+    <ion-content>
+        <div class="list"  style="background: #FFFFFF;">
+            <div class="row row-wrap">
+                <div class="col col-50" ng-repeat="item in param.productList" ng-click="enterDetails(item.productId)">
+                    <img  ng-src="{{item.firstUrl}}" style="width: 168px;height: 168px;margin: auto">
+                    <p style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 16px;margin-top: 10px">{{item.productName}}</p>
+                    <p style="font-family: PingFangSC-Regular;font-size: 16px;color: #FF6666;letter-spacing: 0;line-height: 16px;margin-top:6px">￥{{item.price}}</p>
+                    <p style="font-size: 12px;margin-top: 6px;margin-bottom: 24px"><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;">零售价<del>¥{{item.productDetail.productMarketPrice}}</del></span><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;margin-left: 26px">销量{{item.productDetail.productSalesVolume}}</span></p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ionic-view>

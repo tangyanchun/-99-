@@ -1,0 +1,97 @@
+<ion-view style="background: #f2f5f9">
+    <style type="text/css">
+
+        .tabs-striped.tabs-color-assertive .tab-item{color: #333333;opacity:1;font-size: 0.3rem}
+        .bgfff{
+            background-color: #fff;
+        }
+        .active{
+            background: #e5e5e5 !important;
+        }
+    </style>
+    <!--<ion-content>-->
+    <!--视频-->
+    <div style="position: relative">
+        <!--购买视频后点击播放弹出关注讲师微信-->
+        <div class="a" style="width: 5.8rem;height:3rem;background: #FFFFFF;opacity:0.8;position: absolute;top: 50%;left: 50%;margin-top: -1.5rem;margin-left: -2.9rem;z-index: 1001" ng-show="addWeChat">
+            <div style="float: left">
+                <img src="images/teachers.jpg" style="width: 2rem;height: 2rem;margin-left: 0.78rem;margin-top: 0.4rem;z-index: 1001">
+                <p style="margin-top: 0.1rem;color: #333333;font-size: 0.2rem;margin-left:0.88rem;">请添加讲师微信</p>
+            </div>
+            <div style="margin-left: 3.2rem;margin-top: 0.1rem;">
+                <button style="font-size: 0.24rem;color: #aaaaaa;border: 1px solid #aaaaaa;border-radius: 0.46rem;width: 1.68rem;height: 0.52rem" ng-click="laterAdd()">稍后添加</button>
+                <button style="font-size: 0.24rem;color: #ff4a59;border: 1px solid #ff4a59;border-radius: 0.46rem;width: 1.68rem;height: 0.52rem" ng-click="mineAdd()">我已添加</button>
+            </div>
+        </div>
+        <video ng-src="{{param.playURL}}" style="height:200px;width:100%; position: relative;z-index: 1" poster="{{param.backgroudurl}}" />
+    </div>
+
+    <!--切换-->
+    <div class="tabs-striped tabs-top tabs-background-light tabs-color-assertive">
+        <div class="tabs" style="margin-top:-48px;position: relative;margin-bottom: 44px;">
+            <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.tabType=='catalog']"
+               ng-click="chooseTab('catalog')">
+                <span style="font-size:16px">课程目录</span>
+            </a>
+            <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.tabType=='detail']"
+               ng-click="chooseTab('detail')">
+                <span style="font-size:16px">课程介绍</span>
+            </a>
+        </div>
+    </div>
+    <div ng-if="param.tabType=='catalog'"style="height:400px;overflow-y: scroll;padding-bottom: 44px;">
+        <div  name="$index"  ng-repeat="itemProduct1 in param.product.productDetail.listCourse">
+            <div  ng-repeat="itemProduct2 in itemProduct1.list">
+                <div   >
+                    <div   class="bgfff" ng-click="playCourse(itemProduct1.name+'&'+itemProduct2.name,$parent.$index,$index)" ng-class="{active:'a'+$parent.$index+$index == flag}" style="float:left;width:100%;height:100%">
+                        <a class="item" style="background-color: transparent;">
+                            <div style="float:left;width:4%">
+                                <img ng-if="'a'+$parent.$index+$index != flag" style="margin:auto;float:right;margin-top:10px;margin-right:20px;height:32px;width:6px; " src="images/suwait.png" style="display: inline-block;width: 19px;height: 14px">
+                                <img ng-if="'a'+$parent.$index+$index == flag" style="margin:auto;float:right;margin-top:10px;margin-right:20px;height:32px;width:6px; " src="images/su.png" style="display: inline-block;width: 19px;height: 14px">
+                            </div>
+                            <div style="float:left;width:96%;margin-left:-5px;">
+                                <p style="margin-top:12px;" >
+                                        <span>
+                                            <span style="display:block;">
+                                                <span style="font-size:16px;color:#4A4A4A;">{{itemProduct1.name}} </span><span style="font-size:14px;width:180px;color:#9B9B9B;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;">{{itemProduct2.name}}</span>
+                                            </span>
+                                            <span style="font-size:12px;margin-top:8px;margin-left:0px;display:block;color:#9B9B9B;">{{itemProduct2.duration}}/{{itemProduct2.numberOfPlayback}}人学习过</span>
+                                        </span>
+                                    <span>
+                                            <img ng-if="'a'+$parent.$index+$index != flag" style="margin:auto;float:right;margin-top:-35px;height:25px;width:25px;" src="images/playwait.png" style="display: inline-block;">
+                                            <img ng-if="'a'+$parent.$index+$index == flag" style="margin:auto;float:right;margin-top:-35px;height:25px;width:25px;" src="images/play.png" style="display: inline-block;">
+                                        </span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--详情页的图片-->
+    <div ng-if="param.tabType=='detail'">
+        <div style="margin-top:40px;position:absolute;height:400px;overflow-y:auto;width:100%">
+            <div ng-repeat="item in param.product.productDetail.detailList">
+                <img ng-src="{{item}}" style="width:100%">
+            </div>
+            <br><br><br><br><br><br>
+        </div>
+    </div>
+    <!--</ion-content>-->
+    <div class="tabs" ng-show="curriculum"  style="padding-top: 0px">
+        <a class="tab-item" style="background:white;color:red;min-width:5rem">
+            <span style="float:right;margin-right:20px;font-size:20px">￥{{param.product.price}}</span>
+        </a>
+        <a class="tab-item" style="background:red;color:white" ng-click="goPay()">
+            <span style="font-size: 16px">立即购买</span>
+        </a>
+    </div>
+    <div class="tabs" ng-show="isMember"  style="padding-top: 0px">
+        <a class="tab-item" style="background:white;color:red;min-width:5rem">
+        </a>
+        <a class="tab-item" style="background:red;color:white;float:right;" ng-click="goMember()">
+            <span style="font-size: 16px">立即成为店主</span>
+        </a>
+    </div>
+</ion-view>

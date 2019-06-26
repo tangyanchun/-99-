@@ -1,0 +1,45 @@
+<ion-view>
+    <style>
+        .popup{background: #ffffff!important;}
+        .popup-title{color: #FF6666}
+        .popup-body{text-align: center;line-height: 16px}
+    </style>
+    <!--搜索-->
+    <div style="height: 56px;width: 100%;line-height: 56px;padding: 13px;position: relative;background:#FFFFFF;
+box-shadow: 0 2px 4px 0 rgba(199,199,199,0.50);">
+        <div style="height: 30px;position: relative;width:78.7%;">
+            <i class="icon ion-ios-search placeholder-icon"  style="position: absolute;left: 20px;top: -10px;font-size: 20px"></i>
+            <input type="text" style="width:100%;background: #EBEBEC;border: 0 solid #CCCCCC;border-radius: 58px;padding-left:50px;"  ng-model="param.productName" ng-focus="checkInput()" id="searchbox">
+        </div>
+        <span style="font-family: PingFang-SC-Medium;font-size: 16px;color: #FF6666;letter-spacing: -0.47px;line-height: 22px;position: absolute;right: 20px;top: 19px" ng-click="search()">搜索</span>
+    </div>
+    <ion-content style="margin-top: 56px">
+        <!--历史记录-->
+        <div class="list"  ng-if="!param.productShow" >
+            <p class="item" style="font-family: PingFang-SC-Regular;font-size: 14px;color: #9B9B9B;letter-spacing: 0;line-height: 16px;" ng-if="param.record">历史搜索记录</p>
+            <div style="margin-bottom: 50px" ng-if="param.record">
+                <p style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 16px;" class="item" ng-repeat="item in param.commodityArray track by $index" >{{item}}</p>
+            </div>
+            <div style="width: 52.5%;height: 36px;line-height: 36px;text-align: center;background: #F5F5F5;
+border: 1px solid #CCCCCC;border-radius: 7px;;margin: auto;position: relative" ng-click="clearText()" ng-if="param.record">
+                <img src="images/deleteHistoy.png" style="width: 18px;height: 18px;position: absolute;top: 9px;left: 17px;">
+                <p style="font-family: PingFang-SC-Regular;font-size: 16px;color: #4A4A4A;letter-spacing: 0;margin-left: 18px">清空历史搜索记录</p>
+            </div>
+        </div>
+        <!--商品展示-->
+        <div class="list"  style="background: #FFFFFF;" ng-if="param.productShow">
+            <div class="row row-wrap">
+                <div class="col col-50" ng-repeat="item in param.productList" ng-click="enterDetails(item.productId)">
+                    <img  ng-src="{{item.firstUrl}}" style="width: 168px;height: 168px;margin: auto">
+                    <p style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 16px;margin-top: 10px">{{item.productName}}</p>
+                    <p style="font-size: 12px;margin-top: 6px;margin-bottom: 24px"><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #FF6666;">￥{{item.price}}</span><span style="font-family: PingFangSC-Regular;font-size: 12px;color: #9B9B9B;margin-left: 26px">销量{{item.productSalesVolume}}</span></p>
+                </div>
+            </div>
+        </div>
+        <!--空页面-->
+        <div ng-if="param.productShow&&param.productList<=0">
+            <img src="images/sad.png" style="width: 142px;height: 147px;margin:auto;margin-top: 125px">
+            <p style="font-family: PingFang-SC-Medium;font-size: 14px;color:#4A4A4A;letter-spacing: 0.33px;text-align: center;margin-top: 77px">臣妾搜不到啊...换个关键词试试吧</p>
+        </div>
+    </ion-content>
+</ion-view>

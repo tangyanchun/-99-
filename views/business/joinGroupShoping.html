@@ -1,0 +1,82 @@
+<ion-view style="background: #f2f5f9" >
+    <style>
+        .check{
+            color: #4A4A4A;
+            letter-spacing: 0;
+            background: #F2F5F9;
+            border-radius: 14px;
+        }
+        .check_type{
+            color: #FFFFFF;
+            letter-spacing: 0;
+            background: #FF6666;
+            border-radius: 14px;
+        }
+    </style>
+    <ion-content >
+        <!--轮播图部分-->
+        <ion-slide-box auto-play="true" does-continue="true" slide-interval=2000 show-pager="false">
+            <ion-slide ng-repeat="item in param.product.productDetail.listPic">
+                <div class="box" style="height:7.32rem;width: 7.5rem;">
+                    <img ng-src="{{item}}" style="height:7.32rem;width: 7.5rem;"/>
+                    <div style="position: absolute;bottom: 20px;right: 20px;font-size: 0.34rem;color: #999999"><span >{{$index+1}}</span>/<span >{{param.product.productDetail.listPic.length}}</span></div>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="list">
+
+            <div class="item" style="background: #Fc4B4B;height: 60px;position: relative;padding: 0px">
+                <p style="margin-left: 10px;margin-top: 13px">
+                    <span class="subdued" style="font-family: PingFangSC-Regular;font-size: 36px;color: #FFFFFF;
+                    letter-spacing: 0; ">
+                        <span style="font-size: 20px;display: inline-block;">￥</span>{{param.product.price}}</span>
+                    <span style="color: #ffffff;font-size: 12px;margin-left: 10px">
+                    <del style="position: absolute;left:2.5rem;">￥{{param.product.productDetail.productMarketPrice}}</del></span>
+                    <timer-btn start-time='{{countdown}}'></timer-btn>
+
+                </p>
+                <div style="position: absolute;top: 11px;
+    right: 10px;">
+                    <p><span style="width: 0.8rem;height: 0.35rem;float:right;color: #ff4a59;border: 1px solid #ff4a59;display: inline-block;text-align: center;line-height: 0.35rem;font-size: 10px;border-radius: 16px;background: #ffffff">包邮</span>
+                        <span style="padding: 2px 5px; color: #ff4a59;float:right;border: 1px solid #ff4a59;display: inline-block;text-align: center;line-height: 0.35rem;font-size: 10px;border-radius: 16px;background: #ffffff" ng-if="param.product.type=='special'">韩国进口</span>
+                    </p>
+                    <p style="color: #ffffff;font-size: 12px;display: inline-block;margin-top: 5px">售出{{param.product.productDetail.productSalesVolume}}件</p>
+                </div>
+            </div>
+
+            <div style="margin: 0px 6px ;padding: 13px 0; background: #FFFFFF;color:#333333;border-bottom: 1px solid #E3E3E3">
+                <p style='font-size: 17px;letter-spacing: 0;font-family: PingFang-SC-Bold;margin-bottom: 13px;'>{{param.product.name}}</p>
+                <p style="text-overflow: ellipsis;font-size: 15px;font-family: PingFang-SC-Regular;line-height: 20px;">
+                    <span style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 22px;">{{param.product.description}}</span>
+                </p>
+            </div>
+            <div style="width:60%;margin: 0 auto; padding-bottom: 40px;">
+                <img src="images/finger.png"  style="margin:20px auto 0;width:30px;height:30px;"/>
+                <img style="margin:0 auto;width: 80%;margin-top: 30px;" ng-src="{{userQRCode}}" alt="这是一张图片" style="width: 30%;margin-bottom: 12px;">
+                <p style="text-align: center;color: #666666;font-size: 13px; margin: 12px;">长按识别二维码，了解商品。</p>
+
+            </div>
+
+        </div>
+
+
+
+
+    <!--点击选择型号出现的弹框-->
+
+    <!--点击购买数量出现的弹框-->
+    <!-- <div class="inputModel" ng-show="inputModel" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 999999;background: #000;opacity: 0.85" ng-click="hiddenBox()"></div>
+     <div class="inputModel" ng-show="inputModel" style="width: 236px;height: 150px;background:#FFFFFF;border-radius: 6px;position: absolute;left: 50%;top: 50%;margin-top: -75px;margin-left: -118px;z-index: 9999999999">
+        <p style="font-family: PingFang-SC-Regular;font-size: 18px;color: #000000;letter-spacing: 0;line-height: 22px;text-align: center;margin-top: 16px">修改购买数量</p>
+         <p style="margin-top: 21px;float: none!important;text-align: center"  class="item-note">
+             <ion class="ion ion-ios-minus-outline" style="font-size:25px;margin-right: 0.1rem" ng-click="minusProductNum()" class="grey"></ion>
+             <input type="number"  inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" ng-model="param.productNum"  style="display: inline-block;margin-top: -10px;text-align: center;width: 30%;" ng-click="inputBox()">
+             <ion class="ion ion-ios-plus-outline" style="font-size:25px;margin-left: 0.1rem" ng-click="addProductNum()"></ion>
+         </p>
+         &lt;!&ndash;按钮&ndash;&gt;
+         <ul style="list-style: none;width: 100%;height: 36px;display: flex;flex-wrap: wrap;justify-content: space-around;text-align: center;margin-top: 25px">
+             <li style="background:#F2F5F9;;color:#4A4A4A;font-size:0.36rem;width: 50%;height:36px;line-height:36px;border-bottom-left-radius:6px;" ng-click="cancel()">取消</li>
+             <li style="background: #FF6666;color:white;font-size:0.36rem;width: 50%;height: 36px;line-height:36px;border-bottom-right-radius:6px;" ng-click="Determine()">确定</li>
+         </ul>
+     </div>-->
+</ion-view>

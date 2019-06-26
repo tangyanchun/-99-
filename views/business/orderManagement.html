@@ -1,0 +1,161 @@
+<ion-view style="background: #f2f5f9">
+    <style type="text/css">
+        .tabs-striped.tabs-color-assertive .tab-item{color: #333333;opacity:1;font-size: 0.3rem}
+    </style>
+    <ion-content>
+        <div class="tabs-striped tabs-top tabs-background-light tabs-color-assertive">
+            <div class="tabs" style="top:0" >
+                <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.orderType=='all']"
+                   ng-click="chooseTab('all')">
+                    <span style="font-size:0.35rem">全部</span>
+                </a>
+                <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.orderType=='0']"
+                   ng-click="chooseTab('0')">
+                    <span style="font-size:0.35rem">待付款</span>
+                </a>
+                <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.orderType=='1']"
+                   ng-click="chooseTab('1')">
+                    <span style="font-size:0.35rem">待发货</span>
+                </a>
+                <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.orderType=='4']"
+                   ng-click="chooseTab('4')">
+                    <span style="font-size:0.35rem">待收货</span>
+                </a>
+                <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.orderType=='2']"
+                   ng-click="chooseTab('2')">
+                    <span style="font-size:0.35rem">已完成</span>
+                </a>
+                <a ng-class="{true: 'tab-item active', false: 'tab-item'}[param.orderType=='7']"
+                   ng-click="chooseTab('7')">
+                    <span style="font-size:0.35rem">待组团</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="list" ng-repeat="item in param.orderList">
+            <div ng-if="$index==0" style="padding-top:48px">
+                <a class="item" style="color: #333333;font-size: 0.28rem">美享专供<span ng-if="item.status=='6'" style="float: right;color: #ff4a59">订单关闭</span></a>
+                <a class="item item-avatar" style="min-height: 3rem" ng-click="goDetails(item.businessOrderId)">
+                    <img ng-src="{{item.businessProductFirstUrl}}"
+                         style="border-radius: 0;min-width: 2rem;min-height: 2rem">
+                    <h2 style="margin: 0px 0px 0px 1.2rem;font-size:0.29rem;color: #333333">{{item.businessProductName}}</h2>
+                    <p style="color:#999999;margin-left:1.2rem;margin-top:0.2rem;font-size: 0.28rem">{{item.businessProductSpec}}</p>
+                    <p style="color: #ff4a59;margin-left: 1.2rem;margin-top: 0.54rem;font-size: 0.4rem;">￥{{item.businessProductPrice}}</p>
+                </a>
+                <a class="item">
+                <span class="item-note" style="color: #A4A4A4">共{{item.businessProductNum}}件商品，合计：
+                    <span ng-if="item.type != 'seckill' && item.type != 'collage'&& item.type != 'bargain'" style="color:#ff4a59;font-size: 0.3rem">{{(item.businessProductNum * item.businessProductPrice).toFixed(2)}}</span>
+                    <span ng-if="item.type == 'seckill'" style="color:#ff4a59;font-size: 0.3rem">￥{{(item.businessProductNum *item.payAmount).toFixed(2)}}</span>
+                    <span ng-if="item.type == 'collage'" style="color:#ff4a59;font-size: 0.3rem">￥{{(item.businessProductNum *item.collageAmount).toFixed(2)}}</span>
+                     <span ng-if="item.type == 'bargain'" style="color:#ff4a59;font-size: 0.3rem">￥{{item.payAmount.toFixed(2)}}</span>
+                    （含运费￥0.00）
+                </span>
+                </a>
+                <a class="item" style="height:52px">
+                    <button ng-if="item.status=='4'" class="button button-assertive button-small"
+                            ng-click="confirmReceive(item)"
+                            style="float:right;margin-right:0.1rem;background: transparent;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem;border-radius: 20px;top:-0.1rem;">
+                        确认收货
+                    </button>
+                    <button ng-if="item.status=='4'" class="button button-assertive button-small"
+                            ng-click="findLogistic(item.businessOrderId)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color:#ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem;margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        查看物流
+                    </button>
+                    <button ng-if="item.status=='0'" class="button button-assertive button-small"
+                            ng-click="goPay(item)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem;border-radius: 20px;top:-0.1rem;">
+                        付款
+                    </button>
+                    <button ng-if="item.status=='0'||item.status=='2'||item.status=='6'" class="button button-assertive button-small"
+                            ng-click="deleteOrder(item)"
+                            style="float:right;background:transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; border-radius: 20px;top:-0.1rem;">
+                        删除订单
+                    </button>
+                    <button ng-if="item.status=='2'" class="button button-assertive button-small"
+                            ng-click="buyAgain(item)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        再次购买
+                    </button>
+                    <button ng-if="item.status=='1'" class="button button-assertive button-small"
+                            ng-click="reminding()"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        提醒发货
+                    </button>
+                    <button ng-show="flageButton" ng-if="item.status=='7'&&item.type == 'collage'" class="button button-assertive button-small" ng-click="groupShopingState(item.businessOrderId)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        我的拼友
+                    </button>
+                    <button ng-show="flageButton" ng-if="item.status=='7'&&item.type == 'collage'" class="button button-assertive button-small" ng-click="joinGroupShoping(item.businessOrderId)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        寻找拼友
+                    </button>
+                </a>
+            </div>
+            <div ng-if="$index!=0" >
+                <a class="item" style="color: #333333;font-size: 0.28rem">美享专供</a>
+                <a class="item item-avatar" style="min-height: 3rem" ng-click="goDetails(item.businessOrderId)">
+                    <img ng-src="{{item.businessProductFirstUrl}}"
+                         style="border-radius: 0;min-width: 2rem;min-height: 2rem">
+                    <h2 style="margin-left:1.2rem;font-size:0.29rem;color: #333333">{{item.businessProductName}}</h2>
+                    <p style="color:#999999;margin-left:1.2rem;margin-top:0.2rem;">{{item.businessProductSpec}}</p>
+                    <p style="color: #ff4a59;margin-left: 1.2rem;margin-top: 0.54rem;font-size: 0.4rem;">￥{{item.businessProductPrice}}</p>
+                </a>
+                <a class="item">
+                <span class="item-note" style="color: #A4A4A4">共{{item.businessProductNum}}件商品，合计：
+                   <span ng-if="item.type != 'seckill' && item.type != 'collage' && item.type != 'bargain'" style="color:#ff4a59;font-size: 0.3rem">{{(item.businessProductNum * item.businessProductPrice).toFixed(2)}}</span>
+                    <span ng-if="item.type == 'seckill'" style="color:#ff4a59;font-size: 0.3rem">￥{{(item.businessProductNum *item.payAmount).toFixed(2)}}</span>
+                    <span ng-if="item.type == 'collage'" style="color:#ff4a59;font-size: 0.3rem">￥{{(item.businessProductNum *item.collageAmount).toFixed(2)}}</span>
+                    <span ng-if="item.type == 'bargain'" style="color:#ff4a59;font-size: 0.3rem">￥{{item.payAmount.toFixed(2)}}</span>
+                    （含运费￥0.00）
+                </span>
+                </a>
+                <a class="item" style="height:52px">
+                    <button ng-if="item.status=='4'" class="button button-assertive button-small" ng-click="confirmReceive(item)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem;border-radius: 20px;top:-0.1rem;">
+                        确认收货
+                    </button>
+                    <button ng-if="item.status=='4'" class="button button-assertive button-small"
+                            ng-click="findLogistic(item.businessOrderId)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color:#ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem;margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        查看物流
+                    </button>
+                    <button ng-if="item.status=='0'" class="button button-assertive button-small"
+                            ng-click="goPay(item)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem;border-radius: 20px;top:-0.1rem;">
+                        付款
+                    </button>
+                    <button ng-if="item.status=='0'||item.status=='2'" class="button button-assertive button-small"
+                            ng-click="deleteOrder(item)"
+                            style="float:right;background:transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; border-radius: 20px;top:-0.1rem;">
+                        删除订单
+                    </button>
+                    <button ng-if="item.status=='2'" class="button button-assertive button-small"
+                            ng-click="buyAgain(item)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        再次购买
+                    </button>
+                    <button ng-if="item.status=='1'" class="button button-assertive button-small" ng-click="reminding()"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        提醒发货
+                    </button>
+
+                    <button ng-show="flageButton" ng-if="item.status=='7'&&item.type == 'collage'" class="button button-assertive button-small" ng-click="groupShopingState(item.businessOrderId)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        我的拼友
+                    </button>
+                    <button ng-show="flageButton" ng-if="item.status=='7'&&item.type == 'collage'" class="button button-assertive button-small" ng-click="joinGroupShoping(item.businessOrderId)"
+                            style="float:right;background: transparent;margin-right:0.1rem;border-color: #ff4a59;color: #ff4a59;font-size: 0.3rem;width: 2rem; margin-right:15px;border-radius: 20px;top:-0.1rem;">
+                        寻找拼友
+                    </button>
+                </a>
+            </div>
+        </div>
+        <!--待发货里面没有商品时，显示的页面-->
+        <div class="pedingDelivery" style="margin: 0 auto;width: 3.5rem;height:8rem;padding-top: 3rem">
+            <img src="images/orderNull.png" style="width: 2.46rem;height: 1.89rem;margin: auto">
+            <p align="center" style="margin-top: 0.68rem;font-size: 0.3rem;color: #333333;"> 您还没有相关订单，</p>
+            <p align="center" style="margin-top: 0.2rem;color: #333333;font-size: 0.3rem;">请回<span style="color:#fe4343;font-size: 0.3rem"  ng-click="goHome()">我的商城</span>去下单~</p>
+        </div>
+    </ion-content>
+</ion-view>

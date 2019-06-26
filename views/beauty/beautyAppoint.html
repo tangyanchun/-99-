@@ -1,0 +1,107 @@
+<ion-view style="background: #f2f5f9">
+    <style>
+        span.noChooseDay {
+            color: #333333;
+            line-height: 30px;
+            font-size: 14px;
+            background: white;
+            display: inline-block;
+            height: 30px;
+            width: 44px;
+        }
+        span.chooseDay {
+            color: white;
+            line-height: 44px;
+            font-size: 14px;
+            background: #ff6666;
+            display: inline-block;
+            height: 44px;
+            width: 44px;
+            border-radius: 20px 20px 20px 20px;
+            box-shadow: 0 1px 3px 0 #FF6666;
+        }
+    </style>
+            <ion-content scroll="true">
+            <div class="row" style="min-height: 2rem;">
+                <div class="col col-50" style="background: white;color:black;margin-left:-1px" ng-click="chooseProject()">
+                    <div style="margin-top:10px">
+                        <p style="text-align:center;font-size: 20px">
+                            <i class="icon ion-briefcase" style="color: #FFABAB;"></i>
+                            <span style="color: #FF6666;font-size: 16px;margin: 0 10px">选择项目</span>
+                            <i class="icon ion-chevron-down" style="color:#979797;font-size: 0.3rem"></i>
+                        </p>
+                        <p style="text-align:center;margin-top: 15px;font-size: 14px;color: #666666;line-height: 20px;" ng-if="shopAppointInfo.shopProjectIds.length!=0">{{param.beautyProjectName}}</p>
+                    </div>
+                </div>
+                <div class="col col-50" style="background:white;color:black;margin-left: 2px" ng-click="chooseClerk()">
+                    <div style="margin-top:10px">
+                        <p style="text-align:center;font-size: 20px">
+                            <i class="icon ion-person-stalker" style="color: #FFABAB"></i>
+                            <span style="color: #FF6666;font-size: 16px;margin: 0 6px">选择美容师</span>
+                            <i class="icon ion-chevron-down" style="color:#979797;font-size: 0.3rem"></i>
+                        </p>
+                        <p style="text-align:center;margin-top: 15px;font-size: 14px;color: #666666" ng-if="shopAppointInfo.clerkId!=''">
+                            <img style="width: 42px;
+                                  height:42px;
+                                  border-radius: 20px 20px 20px 20px;
+                                  position: absolute;
+                                  margin-left: 5.5%;
+                                  margin-top: -5px;"
+                                 ng-src="{{param.clerkInfo.photo}}">
+                            <span style="margin-left: 10px;margin-top: 25px">{{param.clerkInfo.name}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="background: white;color:black;margin-top:1px;text-align: center">
+                <div class="col" style="width:11%;" ng-repeat="item in param.weekDays" ng-click="chooseAppointDate(item.dateValue)">
+                    <span class="noChooseDay" ng-if="item.dateValue!=param.chooseWeekDate">{{item.dateIndex}}</span>
+                    <span class="chooseDay" ng-if="item.dateValue==param.chooseWeekDate">{{item.dateIndex}}</span>
+                </div>
+            </div>
+            <div style="margin-top:0px;background:pink;color:transparent;font-size:1px;height:2px;">123</div>
+            <div class="row" ng-repeat="item in param.timeDate"
+                 style="background:white;color:black;font-size:10px;
+                      text-align:center;margin-left:40px;width:90%">
+                <div class="col" ng-repeat="item1 in item" ng-click="appointProject(item1)">
+                    <span style="color: black" ng-if="item1.status=='1'">{{item1.value}}</span>
+                    <span style="text-decoration:line-through;color: grey" ng-if="item1.status=='0'">{{item1.value}}</span>
+                    <span style="color:red;text-decoration:underline" ng-if="item1.status=='2'">{{item1.value}}</span>
+                </div>
+
+            </div>
+            <div class="row" style="background:white;color:black;width:45px;margin-top:-186px;height:186px;">
+                <div class="col">
+                    <i class="icon ion-ios-partlysunny" style="color: #DADADA ;font-size: 20px"></i>
+                    <i class="icon ion-ios-sunny" style="color: #DADADA ;font-size: 20px;margin-top: 10px"></i>
+                    <i class="icon ion-ios-cloudy-night" style="color: #DADADA ;font-size: 20px;margin-top:10px"></i>
+                </div>
+            </div>
+            <div class="list">
+                <a class="item item-icon-left" ui-sref="beautySendMessage">
+                    <i class="icon ion-chatbubble-working" style="color:#FF6666"></i>
+                    <span style="color: #333333;font-size: 15px">捎话</span>
+                    <span class="item-note" ng-if="shopAppointInfo.shopProjectDetail==''" style="font-size: 15px;color: #666666">请输入捎话&nbsp;></span>
+                    <span class="item-note" ng-if="shopAppointInfo.shopProjectDetail!=''">{{shopAppointInfo.shopProjectDetail|textLengthSet:true:10:'...'}}></span>
+                </a>
+            </div>
+            <center>
+                <button class="button"
+                        style="width:90%;border-radius:20px;font-size: 17px;background: #FF6666;color: #ffffff" ng-click="confirmAppoint()">发送预约</button>
+            </center>
+            </ion-content>
+    <div class="tabs" style="background:white;color:#333333;height: 45px;">
+        <a class="tab-item" style="color:#FF6666;">
+            <p style="font-size:25px;margin-top:-12px"><i class="ion ion-ios-paper-outline"></i></p>
+            <p style="margin-top:-30px;font-size:11px">预约</p>
+        </a>
+        <!--<a class="tab-item">
+            <p style="font-size:25px;margin-top:-12px"><i class="ion ion-ios-rose-outline"></i></p>
+            <p style="margin-top:-30px;font-size:11px">评价</p>
+        </a>-->
+        <a class="tab-item" ui-sref="beautyUserCenter">
+            <p style="font-size: 25px;margin-top:-10px"><i class="ion ion-ios-person-outline"></i></p>
+            <p style="margin-top:-30px;font-size:11px">我的</p>
+        </a>
+    </div>
+</ion-view>

@@ -1,0 +1,75 @@
+<ion-view style="background: #f2f5f9">
+    <style>
+        /*底部切换*/
+        .footColor{color: #4A4A4A;}
+        .footActive{
+            background:#FC4B4B;color:#ffffff;
+        }
+    </style>
+    <ion-content style="bottom: 48px">
+        <!--顶部搜索-->
+        <div style="background: #ffffff;width: 100%;height: 56px;line-height: 56px;display: flex;justify-content: space-between">
+            <div style="height: 30px;margin: auto;position: relative;width:68%">
+                <i class="icon ion-ios-search placeholder-icon"  style="position: absolute;left: 20px;top: -10px;font-size: 20px"></i>
+                <input type="text" style="width:100%;background: #f5f5f5;border: 0 solid #CCCCCC;border-radius: 58px;padding-left:50px;" placeholder="搜索您想要的宝贝" ng-click="search()">
+            </div>
+        </div>
+        <img ng-src="{{param.specialShopInfo.shopURL}}" style="width:100%;height:200px">
+        <!--正品韩货-->
+         <div class="row"  style="color:#666666;background: #ffffff;padding:0px;height: 40px">
+             <div class="col col-33" style="text-align: center;line-height: 15px;padding:0px">
+                 <span  style="font-size:0.24rem">
+                     <img src="images/success.png" style="width: 15px;height: 15px;display: inline-block;">
+                     <span>正品韩货</span>
+                 </span>
+             </div>
+             <div class="col col-33" style="text-align: center;line-height: 15px;padding:0px">
+               <span  style="font-size:0.24rem">
+                     <img src="images/success.png" style="width: 15px;height: 15px;display: inline-block;">
+                     <span>一站式全球购物</span>
+                 </span>
+             </div>
+             <div class="col col-33" style="text-align: center;line-height: 15px;padding:0px">
+                 <span  style="font-size:0.24rem">
+                     <img src="images/success.png" style="width: 15px;height: 15px;display: inline-block;">
+                      <span>跨境直购</span>
+                 </span>
+             </div>
+         </div>
+
+        <div class="bar  bar-assertive">
+            <h1 class="title">欢迎光临{{param.specialShopInfo.shopName}}</h1>
+        </div>
+        <!--商品-->
+        <div class="list"  style="background: #FFFFFF;margin-top: 60px" >
+            <div class="row row-wrap">
+                <div class="col col-50" ng-repeat="item in param.specialProductList" ng-click="enterSpecialProductDetails(item.productId)">
+                    <img  ng-src="{{item.firstUrl}}" style="width: 168px;height: 168px;margin: auto">
+                    <p style="font-family: PingFang-SC-Regular;font-size: 14px;color: #4A4A4A;letter-spacing: 0;line-height: 16px;margin-top: 10px;text-align: center">{{item.productName}}</p>
+                    <p style="font-family: PingFangSC-Regular;font-size: 16px;color: #FF6666;letter-spacing: 0;line-height: 16px;margin-top:6px;text-align: center">直购价：{{item.price}}</p>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <!--底部切换-->
+    <div style="width: 100%;background: #DBDBDB ;position: absolute;left: 0px;bottom: 0px;right: 0px;height: 48px;">
+        <ul style="display: flex;flex-wrap: wrap;justify-content: space-between;font-size: 14px">
+            <li style="text-align: center;width: 25%;height: 48px" class="footColor" ng-class="{'footActive':param.checkType==0}" ng-click="checkBg(0)" ui-sref="specialProductList">
+                <i class=" icon ion-ios-home-outline"  style="font-size: 24px;display: inline-block;margin-top: 5px" class="footColor"></i>
+                <p style="margin-top: 1px;font-size: 12px">首页</p>
+            </li>
+            <li style="text-align: center;width: 25%;height: 48px"  ng-class="{'footActive':param.checkType==1}" ng-click="checkBg(1)" class="footColor" ui-sref="specialClassification">
+                <i class=" icon ion-ios-keypad-outline" style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p style="margin-top: 1px;font-size: 12px">分类</p>
+            </li>
+            <!--<li style="text-align: center;width: 25%;height: 48px"  ng-class="{'footActive':param.checkType==2}" ng-click="checkBg(2)" class="footColor" ui-sref="buyCart">
+                <i class="icon ion-ios-cart-outline" style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p style="margin-top: 1px;font-size: 12px">购物车</p>
+            </li>-->
+            <li style="text-align: center;width: 25%;height: 48px"  ng-class="{'footActive':param.checkType==3}" ng-click="checkBg(3)" class="footColor" ui-sref="specialMine">
+                <i class=" icon ion-ios-list-outline" style="font-size: 24px;display: inline-block;margin-top: 5px"></i>
+                <p style="margin-top: 1px;font-size: 12px">我的</p>
+            </li>
+        </ul>
+    </div>
+</ion-view>

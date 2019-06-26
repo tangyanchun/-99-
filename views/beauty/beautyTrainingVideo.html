@@ -1,0 +1,11 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <div class="list">
+            <a class="item" ng-repeat="item in param.videos">
+                <p>{{item.name}}</p>
+                <video ng-src="{{item.url}}" controls="controls"
+                       style="height:200px;width:100%; position: relative;z-index: 1"/>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

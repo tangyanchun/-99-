@@ -1,0 +1,35 @@
+    <style type="text/css">
+    .tabs-striped.tabs-color-assertive .tab-item{color: #333333;opacity:1;font-size: 0.3rem}
+    </style>
+<ion-view style="background:#F6F6F6">
+    <div class="tabs-striped tabs-top tabs-background-light tabs-color-assertive">
+        <div class="tabs" style="margin-top:-45px">
+            <a ng-class="{true:'tab-item active',false:'tab-item'}[param.type=='onGoing']" ng-click="selectAppointProject('onGoing')">
+                进行中
+            </a>
+            <a ng-class="{true:'tab-item active',false:'tab-item'}[param.type=='finish']" ng-click="selectAppointProject('finish')">
+                已结束
+            </a>
+        </div>
+    </div>
+    <ion-content style="margin-top:60px">
+        <ion-item ng-repeat="item in param.appointProjectList"
+                  style="width: 95%;margin: auto;margin-bottom: 10px"
+                  ng-click="goAppointDetail(item.id)">
+            <div ng-if="param.type=='onGoing'">
+                <h1 style="font-size: 14px;color: #333333">{{item.appointStartTime|date:"yyyy-MM-dd HH:mm:ss"}}</h1>
+                <p class="item-note"><i class="ion ion-clock"></i><span style="color: #888888;font-size: 12px">&nbsp;{{item.appointPeriod}}分钟</span></p>
+                <p style="margin-top:10px;font-size: 14px;color: #333333">{{item.shopProjectName}}</p>
+                <p style="margin-top:10px;color: #888888;font-size: 13px;">{{item.sysClerkName}}</p>
+                <p style="margin-top:10px;color: #888888;font-size: 13px">{{item.sysShopName}}</p>
+            </div>
+            <div  ng-if="param.type=='finish'">
+                <h1 style="font-size: 14px;color: #333333">{{item.appointStartTime|date:"yyyy-MM-dd HH:mm:ss"}}</h1>
+                <p class="item-note"><span style="color: #FF6666;font-size: 14px">已结束</span></p>
+                <p style="margin-top:10px;font-size: 14px;color: #333333">{{item.shopProjectName}}</p>
+                <p style="margin-top:10px;color: #888888;font-size: 13px;">{{item.sysClerkName}}</p>
+                <p style="margin-top:10px;color: #888888;font-size: 13px;">{{item.sysShopName}}</p>
+            </div>
+        </ion-item>
+    </ion-content>
+</ion-view>

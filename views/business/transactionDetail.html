@@ -1,0 +1,52 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <div class="list" >
+            <p class="item" ng-if="param.transactionDetailData.transactionType!='withdraw'">
+                <span style="font-size:0.28rem;color:#666666">入账金额</span>
+                <span style="float:right;font-size:0.48rem;color:#333333">{{param.transactionDetailData.amount}}</span>
+            </p>
+            <p class="item" ng-if="param.transactionDetailData.transactionType=='withdraw'">
+                <span style="font-size:0.28rem;color:#666666">出账金额</span>
+                <span style="float:right;font-size:0.48rem;color:#333333">{{param.transactionDetailData.amount}}</span>
+            </p>
+            <p class="item body">
+                <a style="font-size:0.26rem;color:#333333" ng-if="param.transactionDetailData.transactionType!='withdraw'">
+                    <span>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>
+                    <span style="float:right;">收入</span>
+                </a>
+                <a style="font-size:0.26rem;color:#333333" ng-if="param.transactionDetailData.transactionType=='withdraw'">
+                    <span>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>
+                    <span style="float:right;">支出</span>
+                </a>
+                <a style="font-size:0.2rem;color:#333333;margin-top:0.1rem">
+                    <span>时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间</span>
+                    <span style="float:right">{{param.transactionDetailData.transactionDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </a>
+                <a style="font-size:0.2rem;color:#333333;margin-top:0.1rem">
+                    <span>交易单号</span>
+                    <span style="float:right">{{param.transactionDetailData.transactionId}}</span>
+                </a>
+                <a style="font-size:0.2rem;color:#333333;margin-top:0.1rem">
+                    <span>剩余金额</span>
+                    <span style="float:right">{{param.accountInfo.balance}}</span>
+                </a>
+                <a style="font-size:0.2rem;color:#333333;margin-top:0.1rem" ng-if="param.transactionDetailData.transactionType!='withdraw'">
+                    <span>状态</span>
+                    <span style="float:right" ng-if="param.transactionDetailData.transactionStatus=='0'">用户未确认收货，提现冻结中</span>
+                    <span style="float:right" ng-if="param.transactionDetailData.transactionStatus=='1'">用户已确认收货，可提现</span>
+                    <span style="float:right" ng-if="param.transactionDetailData.transactionStatus=='2'">用户退货，不能提现</span>
+                </a>
+                <a style="font-size:0.2rem;color:#333333;margin-top:0.1rem" ng-if="param.transactionDetailData.transactionType=='withdraw'">
+                    <span>状态</span>
+                    <span style="float:right" ng-if="param.transactionDetailData.transactionStatus=='0'">审核中</span>
+                    <span style="float:right" ng-if="param.transactionDetailData.transactionStatus=='1'">审核通过</span>
+                    <span style="float:right" ng-if="param.transactionDetailData.transactionStatus=='2'">审核拒绝</span>
+                </a>
+                <a style="font-size:0.2rem;color:#333333;margin-top:0.1rem" ng-if="param.transactionDetailData.transactionType!='withdraw'">
+                    <span>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+                    <span style="float:right">佣金</span>
+                </a>
+            </p>
+        </div>
+    </ion-content>
+</ion-view>

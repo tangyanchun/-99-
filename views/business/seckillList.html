@@ -1,0 +1,64 @@
+<ion-view style="background: #f2f5f9">
+    <style type="text/css">
+        .grey{background: #F8F8F8}
+        .checkBg{background: #FF6666;font-family: PingFang-SC-Medium;  font-size: 14px;  color: #FFFFFF;  letter-spacing: 0.33px;  line-height: 14px;}
+        .noCheckBg{background: #FFFFFF;font-family: PingFang-SC-Medium;  font-size: 14px;  color: #4A4A4A;  letter-spacing: 0.33px;
+            line-height: 14px;}
+    </style>
+    <ion-content>
+        <!--切换-->
+        <div class="row" style="width: 100%;height: 44px;line-height: 44px;background: #ffffff!important;padding: 0px">
+            <div class="col col-33" style="font-size: 15px;text-align: center;letter-spacing: 0.33px;line-height: 32px;" ng-class="{'checkBg':param.checkType=='1','noCheckBg':param.checkType!='1'}" ng-click="checkType('1')">
+                即将开始
+            </div>
+            <div class="col col-33" style="font-size: 15px;text-align: center;letter-spacing: 0.33px;line-height: 32px;border-right: 1px solid #f5f5f5" ng-class="{'checkBg':param.checkType=='0','noCheckBg':param.checkType!='0'}" ng-click="checkType('0')">
+                抢购中
+            </div>
+            <div class="col col-33" style="font-size: 15px;text-align: center;letter-spacing: 0.33px;line-height: 32px;border-right: 1px solid #f5f5f5" ng-class="{'checkBg':param.checkType=='2','noCheckBg':param.checkType!='2'}" ng-click="checkType('2')">
+                已结束
+            </div>
+        </div>
+            <div class="item item-avatar"
+                 ng-repeat="item2 in seckillList"
+                 style="min-height:32px;width:100%;height: 140px;margin-bottom:10px;margin-top: 10px"  ng-click="seckillInfo(item2)" ng-if="param.checkType==item2.status">
+                <img ng-src="{{item2.firstUrl}}"
+                     style="width: 1.5rem;height: 2.0rem;border-radius: 0; min-height: 2rem; min-width: 2rem;">
+                <h2 style="margin-left:1.5rem ;font-size: 12px;font-size: 12px;color: #FF6666;letter-spacing: 0.25px;line-height: 12px;"
+                    get-data="getData()" timer-btn remind-me="item2.status" start-time="item2.countdown" ng-if="item2.status == 0">
+                </h2>
+                <h2 style="margin-left:1.5rem ;font-size: 12px;font-size: 12px;color: #FF6666;letter-spacing: 0.25px;line-height: 12px;"
+                     ng-if="item2.status == 1" get-data="getData()" timer-btn remind-me="item2.status" start-time="item2.countdown">
+                </h2>
+                <h2 style="margin-left:1.5rem;font-size: 14px;margin-top: 10px">{{item2.productName}}</h2>
+                <br>
+                <span style="margin-left:1.55rem;font-size: 18px;color: #FF6666;letter-spacing: 0;line-height: 18px;">￥{{item2.favorablePrice}}</span>
+                <span style="color: #9B9B9B;line-height: 14px;font-size: 14px;margin-left: 16px">市场价<span style="text-decoration:line-through;">￥{{item2.marketPrice}}</span></span>
+                <a style="background: #FF6666 100%;border-radius: 100px;width: 89px;line-height: 24px;margin-left: 69%;margin-top: 19px;"
+                   ng-if="item2.status == 0">
+                    &nbsp;&nbsp;立即秒杀
+                </a>
+                <a style="background: #D0021B;border-radius: 100px;width: 89px;line-height: 24px;margin-left:69%;margin-top: 19px;"
+                   ng-if="item2.status == 1" >
+                    &nbsp;&nbsp;即将开始
+                </a>
+                <a style="background: #9B9B9B;border-radius: 100px;width: 89px;line-height: 24px;margin-left: 69%;margin-top: 19px;"
+                   ng-if="item2.status == 2">
+                    &nbsp;&nbsp;活动结束
+                </a>
+                <a style="background: #EB5E0F;border-radius: 100px;width: 89px;line-height: 24px;margin-left: 69%;margin-top: 19px;"
+                   ng-if="item2.status == 3">
+                    &nbsp;&nbsp;&nbsp;&nbsp;已抢光
+                </a>
+            </div>
+
+
+        <!--空页面-->
+        <div ng-if="seckillList.length<=0">
+            <img src="images/sad.png" style="width: 142px;height: 147px;margin:auto;margin-top: 181px">
+            <p style="font-family: PingFang-SC-Medium;font-size: 14px;color:#4A4A4A;letter-spacing: 0.33px;text-align: center;margin-top: 77px">您来晚了，该专区商品没有库存啦~</p>
+        </div>
+        <!--<div style="position:fixed;width:100%;" ng-if="seckillList.length>0">-->
+            <!--<img src="images/line.png" style="width: 100%">-->
+        <!--</div>-->
+    </ion-content>
+</ion-view>

@@ -1,0 +1,47 @@
+<ion-view style="background: #f2f5f9">
+    <ion-content>
+        <style>
+            input[disabled], input[readonly]:not(.cloned-text-input), select[disabled], select[readonly], textarea[disabled], textarea[readonly]:not(.cloned-text-input){background-color: #FFFFFF}
+        </style>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">收货人</span>
+                <input type="text" placeholder="请输入收货人的姓名" class="values" ng-model="param.userAddressInfo.userName">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">联系电话</span>
+                <input type="text" placeholder="请输入收货人的手机号码" class="values" ng-model="param.userAddressInfo.userPhone">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">所在地区</span>
+                <input type="text" placeholder="请选择"  id="J_Address" class="values" ng-model="param.userAddressInfo.province">
+                <i style="float:right;margin-right:30px;font-size:19px" class="ion ion-ios-arrow-right"></i>
+            </label>
+            <label class="item item-input">
+                <textarea style="height:100px"
+                          placeholder="请输入收货人详细地址，如：街道、门牌号等。"   class="values" ng-model="param.userAddressInfo.detailAddress"></textarea>
+            </label>
+        </div>
+       <!-- <div class="list">
+            <li class="item item-toggle">
+                设为默认地址
+                <label class="toggle toggle-balanced">
+                    <input type="checkbox" ng-model="param.userAddressInfo.status">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+        </div>-->
+        <div class="list" ng-if="param.editType=='edit'">
+            <label class="item item-input" ng-click="deleteAddress()">
+                <span style="width: 100%;text-align: center;margin-left: -0.2rem">
+                    删除地址
+                </span>
+            </label>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-assertive">
+        <div class="title" ng-click="saveAddress()">保存并使用</div>
+    </div>
+</ion-view>
